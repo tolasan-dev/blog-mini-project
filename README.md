@@ -1,1 +1,6 @@
-##Blog Post Mini Project
+# Frontend Blog – Guideline for Teammates
+
+#Please Follow up : 
+
+```git clone project
+   
