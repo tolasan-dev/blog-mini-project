@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modern Signup Form</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #d99be23d, #976bff66);
+      padding: 20px;
+    }
+
+    .signup-container {
+      background-color: #fff;
+      display: flex;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      max-width: 900px;
+      width: 100%;
+    }
+
+    .signup-image {
+      flex: 1;
+      background: linear-gradient(180deg, #c084fc9a, #ec489ab7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      flex-direction: column;
+      padding: 40px;
+    }
+
+    .signup-image h2 {
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .signup-image p {
+      font-size: 1rem;
+      opacity: 0.9;
+      text-align: center;
+      max-width: 300px;
+    }
+
+    .signup-form {
+      padding: 40px 40px;
+      background-color: #fff;
+    }
+
+    .signup-form h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #6d28d9;
+      font-weight: 600;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 20px;
+    }
+
+    .form-row .form-group {
+      flex: 1;
+      position: relative;
+    }
+
+    .form-group {
+      position: relative;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 500;
+      color: #374151;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 12px 40px 12px 14px; /* space for icon */
+      border-radius: 10px;
+      border: 1px solid #d1d5db;
+      background-color: #f9fafb;
+      font-size: 15px;
+      transition: 0.3s;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: #8b5cf6;
+      box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.3);
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 12px;
+      top: 37px;
+      cursor: pointer;
+      font-size: 18px;
+      color: #888;
+      user-select: none;
+    }
+
+    .toggle-password:hover {
+      color: #6d28d9;
+    }
+
+    .error-message {
+      color: red;
+      font-size: 13px;
+      margin-top: 5px;
+      min-height: 16px;
+    }
+
+    .btn {
+      width: 100%;
+      background: linear-gradient(135deg, #a855f7, #ec4899);
+      color: #fff;
+      border: none;
+      padding: 12px;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+      margin-top: 10px;
+    }
+
+    .btn:hover {
+      opacity: 0.9;
+    }
+
+    .social-login {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .social-login p {
+      color: #6b7280;
+      margin-bottom: 10px;
+    }
+
+    .social-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .social-btn {
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .social-btn img {
+      width: 20px;
+      height: 20px;
+    }
+
+    .social-btn:hover {
+      background-color: #f3f4f6;
+    }
+
+    input.invalid {
+      border-color: red;
+      box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.2);
+    }
+
+    @media (max-width: 850px) {
+      .signup-container {
+        flex-direction: column;
+      }
+      .signup-image {
+        display: none;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .form-row {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="signup-container">
+    <div class="signup-image">
+      <h2>Welcome!</h2>
+      <p>Create your account and join our amazing community today.</p>
+    </div>
+
+    <div class="signup-form">
+      <h2>Create Account</h2>
+      <form id="signupForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="firstname">First Name</label>
+            <input type="text" id="firstname" placeholder="Enter your first name">
+            <div class="error-message" id="firstnameError"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="lastname">Last Name</label>
+            <input type="text" id="lastname" placeholder="Enter your last name">
+            <div class="error-message" id="lastnameError"></div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="Enter your email">
+          <div class="error-message" id="emailError"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="Enter your password">
+          <span class="toggle-password" onclick="togglePassword('password', this)">👁️</span>
+          <div class="error-message" id="passwordError"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <input type="password" id="confirmPassword" placeholder="Confirm your password">
+          <span class="toggle-password" onclick="togglePassword('confirmPassword', this)">👁️</span>
+          <div class="error-message" id="confirmPasswordError"></div>
+        </div>
+
+        <button type="button" class="btn" onclick="registerAccount()">Sign Up</button>
+
+        <div class="social-login">
+          <p>Or sign up with</p>
+          <div class="social-buttons">
+            <div class="social-btn"><img src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png" alt="Google"> Google</div>
+            <div class="social-btn"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968764.png" alt="Facebook"> Facebook</div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const firstname = document.getElementById('firstname');
+    const lastname = document.getElementById('lastname');
+    const email = document.getElementById('email');
+    const password = document.getElementById('password');
+    const confirmPassword = document.getElementById('confirmPassword');
+
+    const firstnameError = document.getElementById('firstnameError');
+    const lastnameError = document.getElementById('lastnameError');
+    const emailError = document.getElementById('emailError');
+    const passwordError = document.getElementById('passwordError');
+    const confirmPasswordError = document.getElementById('confirmPasswordError');
+
+    function isValidEmail(email) {
+      const regex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
+      return regex.test(email);
+    }
+
+    function isStrongPassword(pass) {
+      const regex = /^(?=.*[A-Z])(?=.*\\d)[A-Za-z\\d@$!%*?&]{8,}$/;
+      return regex.test(pass);
+    }
+
+    function clearErrors() {
+      document.querySelectorAll('.error-message').forEach(el => el.textContent = '');
+      document.querySelectorAll('input').forEach(el => el.classList.remove('invalid'));
+    }
+
+    function togglePassword(id, el) {
+      const input = document.getElementById(id);
+      if (input.type === 'password') {
+        input.type = 'text';
+        el.textContent = '🙈';
+      } else {
+        input.type = 'password';
+        el.textContent = '👁️';
+      }
+    }
+
+    function registerAccount() {
+      clearErrors();
+      let valid = true;
+
+      if (firstname.value.trim() === '') {
+        firstnameError.textContent = 'First name is required.';
+        firstname.classList.add('invalid');
+        valid = false;
+      }
+
+      if (lastname.value.trim() === '') {
+        lastnameError.textContent = 'Last name is required.';
+        lastname.classList.add('invalid');
+        valid = false;
+      }
+
+      if (!isValidEmail(email.value.trim())) {
+        emailError.textContent = 'Enter a valid email address.';
+        email.classList.add('invalid');
+        valid = false;
+      }
+
+      if (!isStrongPassword(password.value.trim())) {
+        passwordError.textContent = 'Password must have 8+ chars, 1 uppercase, and 1 number.';
+        password.classList.add('invalid');
+        valid = false;
+      }
+
+      if (password.value !== confirmPassword.value) {
+        confirmPasswordError.textContent = 'Passwords do not match.';
+        confirmPassword.classList.add('invalid');
+        valid = false;
+      }
+
+      if (!valid) return;
+
+      const payload = {
+        firstName: firstname.value,
+        lastName: lastname.value,
+        email: email.value,
+        password: password.value,
+        confirmPassword: confirmPassword.value
+      };
+
+      fetch('http://blogs.csm.linkpc.net/api/v1/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        document.getElementById('signupForm').reset();
+        alert('✅ Account created successfully!');
+      })
+      .catch(error => {
+        console.error(error);
+        alert('Something went wrong during registration.');
+      });
+    }
+  </script>
+</body>
+</html>
