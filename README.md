@@ -8,5 +8,5 @@
 ```bash
 
 git clone https://github.com/tolasan-dev/blog-mini-project.git
-cd frontend-blog
+cd blog-mini-project
 code . && live-server .   # បើមាន VS Code + Live Server
