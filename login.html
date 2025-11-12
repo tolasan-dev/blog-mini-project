@@ -1,11 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Modern Signup Form</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-  <style>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modern Signup Form</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <link rel="stylesheet" href="assets/vendor/bootstrap.css" />
+    <!-- <style>
     * {
       box-sizing: border-box;
       margin: 0;
@@ -167,9 +173,9 @@
         display: none;
       }
     }
-  </style>
-</head>
-<body>
+  </style> -->
+  </head>
+  <body>
     <div class="signup-container">
       <div class="signup-image">
         <h2>Welcome!</h2>
@@ -181,94 +187,102 @@
         <form>
           <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" id="email" placeholder="Enter your email" required>
+            <input
+              type="email"
+              id="email"
+              placeholder="Enter your email"
+              required
+            />
           </div>
 
           <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" id="password" placeholder="Enter your password" required>
+            <input
+              type="password"
+              id="password"
+              placeholder="Enter your password"
+              required
+            />
           </div>
 
-          <button type="button" class="btn" onclick="login()">Login</button>
+          <button type="button" class="btn rounded-3" onclick="login()">
+            Login
+          </button>
           <p id="message"></p>
           <div class="register-link">
             Don't have an account? <a href="register.html">Register here</a>
           </div>
-         
         </form>
       </div>
     </div>
 
-  <script >
-function login() {
-  let email = document.getElementById('email').value.trim();
-  let password = document.getElementById('password').value.trim();
-  let messageBox = document.getElementById('message');
+    <script>
+      function login() {
+        let email = document.getElementById("email").value.trim();
+        let password = document.getElementById("password").value.trim();
+        let messageBox = document.getElementById("message");
 
-  // 1️⃣ Front-end validation
-  if (!email) {
-    messageBox.style.color = 'red';
-    messageBox.innerText = '❌ Please enter your email.';
-    return;
-  }
+        // 1️⃣ Front-end validation
+        if (!email) {
+          messageBox.style.color = "red";
+          messageBox.innerText = "❌ Please enter your email.";
+          return;
+        }
 
-  // Simple email format check
-  let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailPattern.test(email)) {
-    messageBox.style.color = 'red';
-    messageBox.innerText = '❌ Invalid email format.';
-    return;
-  }
+        // Simple email format check
+        let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailPattern.test(email)) {
+          messageBox.style.color = "red";
+          messageBox.innerText = "❌ Invalid email format.";
+          return;
+        }
 
-  if (!password) {
-    messageBox.style.color = 'red';
-    messageBox.innerText = '❌ Please enter your password.';
-    return;
-  }
+        if (!password) {
+          messageBox.style.color = "red";
+          messageBox.innerText = "❌ Please enter your password.";
+          return;
+        }
 
-  if (password.length < 6) {
-    messageBox.style.color = 'red';
-    messageBox.innerText = '❌ Password must be at least 6 characters.';
-    return;
-  }
+        if (password.length < 6) {
+          messageBox.style.color = "red";
+          messageBox.innerText = "❌ Password must be at least 6 characters.";
+          return;
+        }
 
-  // 2️⃣ API call
-  fetch('http://blogs.csm.linkpc.net/api/v1/auth/login', {  
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email, password })
-  })
-  .then(response => response.json())
-  .then(data => {
-    console.log(data);
+        // 2️⃣ API call
+        fetch("http://blogs.csm.linkpc.net/api/v1/auth/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
 
-    if (data && data.data && data.data.token) {
-      // ✅ Login success
-      localStorage.setItem('token', data.data.token);
-      messageBox.style.color = 'green';
-      messageBox.innerText = '✅ Login successful! Redirecting...';
+            if (data && data.data && data.data.token) {
+              // ✅ Login success
+              localStorage.setItem("token", data.data.token);
+              messageBox.style.color = "green";
+              messageBox.innerText = "✅ Login successful! Redirecting...";
 
-      // Redirect after 1.5 seconds
-      setTimeout(() => {
-        location.href = '../dashboard.html'; // simplified
-      }, 1500);
-
-    } else {
-      // ❌ Invalid credentials from API
-      messageBox.style.color = 'red';
-      messageBox.innerText = data.message || '❌ Invalid email or password.';
-    }
-  })
-  .catch(error => {
-    console.error('Error:', error);
-    messageBox.style.color = 'red';
-    messageBox.innerText = '⚠️ Something went wrong. Please try again.';
-  });
-}
-
-
-
-
-  </script>
-</body>
+              // Redirect after 1.5 seconds
+              setTimeout(() => {
+                location.href = "../dashboard.html"; // simplified
+              }, 1500);
+            } else {
+              
+              // ❌ Invalid credentials from API
+              messageBox.style.color = "red";
+              messageBox.innerText =
+                data.message || "❌ Invalid email or password.";
+            }
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+            messageBox.style.color = "red";
+            messageBox.innerText = "⚠️ Something went wrong. Please try again.";
+          });
+      }
+    </script>
+  </body>
 </html>
