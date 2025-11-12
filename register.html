@@ -8,6 +8,7 @@
 
     <!--  css link external style.css-->
     <link rel="stylesheet" href="assets/css/styles.css" />
+    <!--  link bs5 external  -->
     <link rel="stylesheet" href="assets/vendor/bootstrap.css" />
   </head>
   <body>
@@ -196,6 +197,7 @@
         };
 
         fetch("http://blogs.csm.linkpc.net/api/v1/auth/register", {
+
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
