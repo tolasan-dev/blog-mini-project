@@ -1,196 +1,205 @@
-/* roof colors */
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: "Poppins", sans-serif;
-}
-
 body {
-  min-height: 100vh;
+  margin: 0;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, #d99be23d, #976bff66);
-  padding: 20px;
+  background-color: #f5f5f5;
+  height: 100vh;
 }
 
-.signup-container {
-  background-color: #fff;
-  display: flex;
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-  max-width: 900px;
-  width: 100%;
-}
-
-.signup-image {
-  flex: 1;
-  background: linear-gradient(180deg, #c084fc9a, #ec489ab7);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/* Sidebar */
+.sidebar {
+  width: 230px;
+  background: linear-gradient(180deg, #c084fc, #ec489a);
   color: #fff;
+  display: flex;
   flex-direction: column;
-  padding: 40px;
+  align-items: center;
+  padding: 2rem 1rem;
+  box-shadow: 2px 0 12px rgba(0, 0, 0, 0.15);
+  border-radius: 0 20px 20px 0;
+}
+.active {
+  /* background: linear-gradient(180deg, #c084fc, #ec489a) !important; */
+  background: rgba(192, 21, 208, 0.634) !important;
 }
 
-.signup-image h2 {
-  font-size: 2rem;
-  font-weight: 600;
-  margin-bottom: 10px;
+.sidebar h3 {
+  font-weight: 700;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
-.signup-image p {
-  font-size: 1rem;
-  opacity: 0.9;
-  text-align: center;
-  max-width: 300px;
-}
-
-.signup-form {
-  padding: 40px 40px;
-  background-color: #fff;
-}
-
-.signup-form h2 {
-  text-align: center;
-  margin-bottom: 25px;
-  color: #6d28d9;
-  font-weight: 600;
-}
-
-.form-row {
-  display: flex;
-  gap: 20px;
-}
-
-.form-row .form-group {
-  flex: 1;
-  position: relative;
-}
-
-.form-group {
-  position: relative;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: 500;
-  color: #374151;
-}
-
-.form-group input {
-  width: 100%;
-  padding: 12px 40px 12px 14px; /* space for icon */
-  border-radius: 10px;
-  border: 1px solid #d1d5db;
-  background-color: #f9fafb;
-  font-size: 15px;
-  transition: 0.3s;
-}
-
-.form-group input:focus {
-  outline: none;
-  border-color: #8b5cf6;
-  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.3);
-}
-
-.toggle-password {
-  position: absolute;
-  right: 12px;
-  top: 37px;
-  cursor: pointer;
-  font-size: 18px;
-  color: #888;
-  user-select: none;
-}
-
-.toggle-password:hover {
-  color: #6d28d9;
-}
-
-.error-message {
-  color: red;
-  font-size: 13px;
-  margin-top: 5px;
-  min-height: 16px;
-}
-
-.btn {
-  width: 100%;
-  background: linear-gradient(135deg, #a855f7, #ec4899);
+.sidebar a {
   color: #fff;
-  border: none;
-  padding: 12px;
+  text-decoration: none;
+  padding: 0.75rem 1rem;
+  width: 100%;
   border-radius: 10px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: 0.3s;
-  margin-top: 10px;
-}
-
-.btn:hover {
-  opacity: 0.9;
-}
-
-.social-login {
-  text-align: center;
-  margin-top: 20px;
-}
-
-.social-login p {
-  color: #6b7280;
   margin-bottom: 10px;
+  transition: all 0.3s ease;
+  text-align: center;
+  font-weight: 500;
+  background: rgba(255, 255, 255, 0.3) !important;
 }
 
-.social-buttons {
+.sidebar a:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+}
+
+/* === ACCORDION – MATCH GRADIENT PURPLE-PINK SIDEBAR === */
+.accordion-button {
+  background: transparent !important;
+  color: #fff !important;
+  border: none !important;
+  box-shadow: none !important;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  padding: 14px !important;
+}
+
+/* Perfect center text + arrow on right */
+.accordion-button.text-center {
+  justify-content: center !important;
+  padding-right: 2.5rem !important;
+  position: relative;
+}
+.accordion-button::after {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.accordion-button:hover {
+  background: rgba(255, 255, 255, 0.2) !important;
+  transform: scale(1.05);
+}
+
+.accordion-button:not(.collapsed) {
+  background: rgba(192, 21, 208, 0.634) !important;
+  color: #fff !important;
+  font-weight: 600;
+}
+
+.accordion-button::after {
+  filter: brightness(0) invert(1); /* White arrow */
+  margin-left: auto;
+}
+
+.accordion-body {
+  padding: 0 !important;
+}
+
+.accordion-body a {
+  transition: all 0.3s ease;
+}
+
+.accordion-body a:hover {
+  background: rgba(255, 255, 255, 0.3) !important;
+  transform: scale(1.02);
+}
+
+/* Active sub-item highlight */
+.accordion-body a.active {
+  background: rgba(255, 255, 255, 0.3) !important;
+  font-weight: 600;
+}
+
+/* end DROPDOWN================ */
+/* Main content */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+/* Topbar */
+.topbar {
+  background: #fff;
+  border-bottom: 1px solid #e2e2e2;
+  padding: 15px 40px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.topbar .welcome {
+  font-weight: 600;
+  color: #333;
+}
+
+.topbar .email {
+  font-size: 13px;
+  color: #777;
+}
+
+.topbar .avatar {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ec489a;
+  margin-left: 15px;
+}
+
+/* Profile card */
+.container {
   display: flex;
   justify-content: center;
-  gap: 10px;
+  align-items: start;
+  margin-top: 60px;
 }
 
-.social-btn {
-  border: 1px solid #d1d5db;
+.register-card {
+  background: #fff;
+  padding: 2.5rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  max-width: 500px;
+  width: 100%;
+  animation: fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.register-card input {
   border-radius: 8px;
-  padding: 10px 20px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: 0.3s;
+  border: 1px solid #ccc;
+  padding: 10px;
 }
 
-.social-btn img {
-  width: 20px;
-  height: 20px;
+.register-card input:focus {
+  border-color: #a855f7;
+  box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.15);
 }
 
-.social-btn:hover {
-  background-color: #f3f4f6;
+.btn-primary {
+  background: linear-gradient(90deg, #c084fc, #ec489a);
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  padding: 10px 0;
+  transition: all 0.3s ease;
 }
 
-input.invalid {
-  border-color: red;
-  box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.2);
-}
-
-@media (max-width: 850px) {
-  .signup-container {
-    flex-direction: column;
-  }
-  .signup-image {
-    display: none;
-  }
-}
-
-@media (max-width: 600px) {
-  .form-row {
-    flex-direction: column;
-  }
+.btn-primary:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(236, 72, 154, 0.3);
 }
