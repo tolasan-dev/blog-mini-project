@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Profile Dashboard</title>
+    <title>My App Dashboard</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -12,27 +12,161 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="assets/css/styles.css" />
+
+    <style>
+     /* 🌈 General Styles */
+      body {
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        background-color: #fafafa;
+        display: flex;
+      }
+
+      /* Sidebar */
+      .sidebar {
+        width: 260px;
+        background: linear-gradient(180deg, #C38DFF 0%, #E879F9 50%, #EC4899 100%);
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        padding: 2rem 1.5rem;
+        box-shadow: 4px 0 20px rgba(0, 0, 0, 0.1);
+        position: fixed;
+        height: 100vh;
+        overflow-y: auto;
+      }
+
+      .sidebar-header {
+        text-align: center;
+        margin-bottom: 2rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .sidebar-header h3 {
+        font-weight: 700;
+        margin: 0;
+        font-size: 1.5rem;
+      }
+
+      .sidebar-header p {
+        font-size: 0.85rem;
+        margin: 0.5rem 0 0 0;
+        opacity: 0.9;
+      }
+
+      .sidebar a {
+        color: #fff;
+        text-decoration: none;
+        padding: 0.9rem 1.2rem;
+        border-radius: 12px;
+        margin-bottom: 8px;
+        transition: all 0.3s ease;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .sidebar a:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateX(5px);
+      }
+
+      .sidebar a.active {
+        background: rgba(255, 255, 255, 0.25);
+        font-weight: 600;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      /* 🌟 Main Content Layout */
+      .main-content {
+        margin-left: 260px; /* match sidebar width */
+        padding: 2rem;
+        width: calc(100% - 260px);
+        min-height: 100vh;
+      }
+
+      /* 🌟 Topbar */
+      .topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #fff;
+        padding: 10px 20px;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        margin-bottom: 30px;
+      }
+
+      .topbar .welcome {
+        font-weight: 600;
+        font-size: 1.1rem;
+        color: #6b21a8;
+        margin-bottom: 4px;
+      }
+
+      .topbar .email {
+        font-size: 0.9rem;
+        color: #666;
+      }
+
+      .topbar .avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: 3px solid #e879f9;
+        object-fit: cover;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      .topbar .avatar:hover {
+        transform: scale(1.05);
+      }
+
+      /* 💾 Profile Card (for edit form) */
+      .register-card {
+        background: #fff;
+        border-radius: 20px;
+        padding: 30px;
+        max-width: 500px;
+        margin: 0 auto;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, #c084fc, #f472b6);
+        border: none;
+        border-radius: 30px;
+        font-weight: 600;
+        transition: 0.3s;
+      }
+
+      .btn-primary:hover {
+        background: linear-gradient(135deg, #a855f7, #ec4899);
+        transform: translateY(-2px);
+      }
+
+    </style>
   </head>
 
   <body>
-    <!-- Sidebar – Using Bootstrap 5 Accordion (No Dropdown) -->
-    <div class="sidebar">
-      <h3>My App</h3>
+    <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <h3>📝 Blog App</h3>
+      <p>Content Management System</p>
+    </div>
+    <a href="./dashboard.html" class="active">📊 Dashboard</a>
+    <a href="./getprofile.html" class="active">👤 Profile</a>
 
-      <!-- Dashboard -->
-      <a href="./dashboard.html" class="active"> Dashboard </a>
-
-      <!-- Accordion: My Articles -->
       <div
         class="accordion accordion-flush"
         id="articlesAccordion"
         style="width: 100%"
       >
-        <div
-          class="accordion-item"
-          style="background: transparent; border: none"
-        >
+        <div class="accordion-item" style="background: transparent; border: none">
           <h2 class="accordion-header" id="headingArticles">
             <button
               class="accordion-button collapsed"
@@ -45,10 +179,11 @@
                 font-weight: 500;
                 border-radius: 8px;
                 margin-bottom: 10px;
-                background: rgba(255, 255, 255, 0.341) !important;
+                background: rgba(255, 255, 255, 0.25) !important;
+                color: white;
               "
             >
-              My Articles
+              📰 My Articles
             </button>
           </h2>
           <div
@@ -58,93 +193,31 @@
             data-bs-parent="#articlesAccordion"
           >
             <div class="accordion-body p-0">
-              <a
-                href="./articles.html"
-                class="d-block text-center py-2 text-white text-decoration-none"
-                style="
-                  font-weight: 500;
-                  border-radius: 8px;
-                  background: rgba(255, 255, 255, 0.1);
-                "
+              <a href="./articles.html" class="d-block text-center py-2">All Articles</a>
+              <a href="./create-article.html" class="d-block text-center py-2"
+                >Create Article</a
               >
-                All Articles
-              </a>
-              <a
-                href="./create-article.html"
-                class="d-block text-center py-2 text-white text-decoration-none"
-                style="
-                  font-weight: 500;
-                  border-radius: 8px;
-                  /* margin: 4px 8px 8px; */
-                  background: rgba(255, 255, 255, 0.1);
-                "
-              >
-                Create Article
-              </a>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Category -->
-      <a href="./categories.html"> Category </a>
+      <a href="./categories.html" class="active">Category</a>
     </div>
 
     <!-- Main Content -->
     <div class="main-content">
       <div class="topbar">
-        <div class="d-flex flex-column align-items-end">
+        <div>
           <div class="welcome" id="welcomeMessage">Welcome, .....!</div>
           <div class="email" id="email">example@gmail.com</div>
         </div>
-        <img class="avatar" id="avatar" src="" />
+        <img class="avatar" id="avatar" src="https://via.placeholder.com/60" />
       </div>
 
-      <!-- Profile Form -->
-      <div class="container">
-        <div class="register-card">
-          <h4 class="text-center mb-4" style="color: #8b5cf6">
-            Edit Your Profile
-          </h4>
-          <form class="d-flex flex-column">
-            <div class="row mb-3">
-              <div class="col">
-                <input
-                  type="text"
-                  id="firstName"
-                  class="form-control"
-                  placeholder="First name"
-                />
-              </div>
-              <div class="col ps-0">
-                <input
-                  type="text"
-                  id="lastName"
-                  class="form-control"
-                  placeholder="Last name"
-                />
-              </div>
-            </div>
-            <input
-              type="email"
-              id="inputEmail"
-              class="form-control mb-3"
-              placeholder="Email address"
-            />
-            <button
-              type="button"
-              class="btn btn-primary"
-              onclick="updateProfile()"
-            >
-              Save
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
 
-    <script src="assets/vendor/bootstrap.bundle.min.js"></script>
-    <script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+   <script>
       const username = document.getElementById("welcomeMessage");
       const email = document.getElementById("email");
       const avatar = document.getElementById("avatar");
@@ -153,6 +226,13 @@
       const iLastName = document.getElementById("lastName");
       const iEmail = document.getElementById("inputEmail");
 
+      // ✅ Load avatar from localStorage first
+      // const avatar = document.getElementById("avatar");
+      const cachedAvatar = localStorage.getItem("avatar");
+      if (cachedAvatar) {
+        avatar.src = cachedAvatar;
+      }
+      // 🧠 Load profile info
       fetch("http://blogs.csm.linkpc.net/api/v1/auth/profile", {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       })
@@ -161,13 +241,18 @@
           const profile = data.data;
           username.innerText = `Welcome, ${profile.firstName} ${profile.lastName}!`;
           email.innerText = profile.email;
-          avatar.src = profile.avatar;
+          avatar.src = profile.avatar || "https://via.placeholder.com/60";
+
+          // ✅ Update cached avatar
+          localStorage.setItem("avatar", profile.avatar);
+
           iFirstName.value = profile.firstName;
           iLastName.value = profile.lastName;
           iEmail.value = profile.email;
         })
         .catch((err) => console.error(err));
 
+      // 💾 Update profile
       const updateProfile = () => {
         const payload = {
           firstName: iFirstName.value,
@@ -175,23 +260,30 @@
           email: iEmail.value,
         };
 
-        fetch("http://blogs.csm.linkpc.net/api/v1/profile", {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
+        fetch("http://blogs.csm.linkpc.net/api/v1/profile/avatar", {
+          method: "POST",
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
           body: JSON.stringify(payload),
         })
           .then((res) => res.json())
           .then((data) => {
             const profile = data.data;
-            username.innerText = `Welcome, ${profile.firstName} ${profile.lastName}!`;
-            email.innerText = profile.email;
-            avatar.src = profile.avatar;
-          })
-          .catch((error) => console.error(error));
-      };
-    </script>
+          username.innerText = `Welcome, ${profile.firstName} ${profile.lastName}!`;
+          email.innerText = profile.email;
+
+          // ⚡ only update avatar if it's NEW
+          if (profile.avatar && profile.avatar !== localStorage.getItem("avatar")) {
+            const newAvatarUrl = `${profile.avatar}?t=${Date.now()}`; // cache-buster
+            avatar.src = newAvatarUrl;
+            localStorage.setItem("avatar", newAvatarUrl);
+          }
+
+          iFirstName.value = profile.firstName;
+          iLastName.value = profile.lastName;
+          iEmail.value = profile.email;
+        })
+        .catch((err) => console.error(err));
+          };
+</script>
   </body>
 </html>

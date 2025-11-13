@@ -3,47 +3,60 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>User Dashboard</title>
+    <title>Profile</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
 
     <style>
       body {
-        background: #f8f9fa;
         font-family: "Poppins", sans-serif;
         margin: 0;
         display: flex;
-        height: 100vh;
-        overflow: hidden;
+        background-color: #fafafa;
       }
 
-      /* Sidebar */
+      /* 🌟 Sidebar */
       .sidebar {
-        width: 230px;
-        background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-        color: white;
-        display: flex;
-        flex-direction: column;
-        padding: 30px 20px;
-        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+        width: 260px;
+        background: linear-gradient(180deg, #c38dff 0%, #e879f9 50%, #ec4899 100%);
+        color: #fff;
+        padding: 2rem 1.5rem;
+        box-shadow: 4px 0 20px rgba(0, 0, 0, 0.1);
+        position: fixed;
+        height: 100vh;
+        overflow-y: auto;
       }
 
-      .sidebar h4 {
+      .sidebar h3 {
         font-weight: 700;
-        margin-bottom: 40px;
         text-align: center;
+        margin-bottom: 0.3rem;
+      }
+
+      .sidebar p {
+        text-align: center;
+        font-size: 0.85rem;
+        opacity: 0.9;
+        margin-bottom: 2rem;
       }
 
       .sidebar a {
-        color: white;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 0.9rem 1.2rem;
         text-decoration: none;
-        margin: 10px 0;
-        padding: 10px;
-        border-radius: 8px;
+        font-weight: 500;
+        border-radius: 12px;
+        margin-bottom: 8px;
         transition: all 0.3s ease;
-        display: block;
       }
 
       .sidebar a:hover {
@@ -51,184 +64,250 @@
         transform: translateX(5px);
       }
 
-      /* Main content */
+      .sidebar a.active {
+        background: rgba(255, 255, 255, 0.25);
+        font-weight: 600;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      /* 🌟 Main Content Layout */
       .main-content {
         flex: 1;
-        padding: 40px;
-        overflow-y: auto;
+        margin-left: 260px;
+        padding: 2rem;
       }
 
-      .main-content h2 {
-        font-weight: 600;
-        color: #333;
-      }
-
-      /* Profile card on the right */
-      .profile-card {
-        width: 300px;
+      /* 🌟 Topbar */
+      .topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         background: #fff;
+        padding: 15px 25px;
         border-radius: 15px;
-        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-        padding: 25px;
-        position: absolute;
-        right: 30px;
-        top: 30px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        margin-bottom: 30px;
+      }
+
+      .topbar h4 {
+        font-weight: 600;
+        color: #6b21a8;
+        margin: 0;
+      }
+
+      .topbar p {
+        color: #777;
+        margin: 0;
+        font-size: 0.9rem;
+      }
+
+      .topbar-avatar {
+        width: 55px;
+        height: 55px;
+        border-radius: 50%;
+        border: 3px solid #e879f9;
+        object-fit: cover;
+        transition: 0.3s;
+      }
+
+      .topbar-avatar:hover {
+        transform: scale(1.05);
+      }
+
+      /* 💾 Profile Card */
+      .profile-card {
+        background: #fff;
+        border-radius: 25px;
+        padding: 40px 30px;
+        max-width: 600px;
+        margin: 0 auto;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
         text-align: center;
       }
 
-      .profile-card img {
-        width: 100px;
-        height: 100px;
+      .profile-avatar {
+        width: 130px;
+        height: 130px;
         border-radius: 50%;
         object-fit: cover;
-        margin-bottom: 15px;
+        border: 5px solid #ec4899b5;
+        margin-bottom: 20px;
+        cursor: pointer;
+        transition: 0.3s;
       }
 
-      .profile-card h5 {
-        font-weight: 600;
-        margin-bottom: 5px;
+      .profile-avatar:hover {
+        transform: scale(1.05);
       }
 
-      .profile-card p {
-        color: #555;
-        font-size: 14px;
+      label {
+        font-weight: 500;
+        color: #6b21a8;
       }
 
-      .logout-btn {
-        background: linear-gradient(135deg, #ff758c, #ff7eb3);
+      input.form-control {
+        border-radius: 12px;
+        padding: 10px 15px;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, #c084fc, #f472b6);
         border: none;
-        color: #fff;
-        padding: 10px 20px;
-        border-radius: 8px;
-        margin-top: 15px;
-        transition: all 0.3s ease;
+        border-radius: 30px;
+        font-weight: 600;
+        transition: 0.3s;
       }
 
-      .logout-btn:hover {
-        background: linear-gradient(135deg, #ff5f7e, #ff85a2);
+      .btn-primary:hover {
+        background: linear-gradient(135deg, #a855f7, #ec4899);
         transform: translateY(-2px);
       }
     </style>
   </head>
+
   <body>
     <!-- Sidebar -->
     <div class="sidebar">
-      <h4>My Dashboard</h4>
-      <a href="#">🏠 Home</a>
-      <a href="#">📰 My Posts</a>
-      <a href="#">⚙️ Settings</a>
-      <a href="#">📩 Messages</a>
+      <h3>📝 Blog App</h3>
+      <p>Content Management System</p>
+      <a href="./dashboard.html">📊 Dashboard</a>
+      <a href="./getprofile.html" class="active">👤 Profile</a>
+      <a href="./articles.html">📰 My Articles</a>
+      <a href="./categories.html">📂 Categories</a>
     </div>
 
     <!-- Main Content -->
     <div class="main-content">
-      <h2 id="welcomeMessage">Welcome, User!</h2>
-      <p class="text-muted">Here is your personalized dashboard content...</p>
-      <hr />
-    </div>
+      <div class="topbar">
+        <div>
+          <h4>Profile Settings</h4>
+          <p>Manage your personal information</p>
+        </div>
+        <img
+          id="topbarAvatar"
+          class="topbar-avatar"
+          src="https://via.placeholder.com/60"
+          alt="Avatar"
+        />
+      </div>
 
-    <!-- Profile Card -->
-    <div class="profile-card">
-      <img id="avatar" alt="User Avatar" onclick="openfile()"><br>
-      <button onclick="deleteAvatar()">Delete Avatar</button><br><br>
-      <input type="file" id="avatar" accept="image/*" oninput="uploadAvatar()" />
-      <h5 id="username">User Name</h5>
-      <p id="email">user@example.com</p>
-      <button class="logout-btn" onclick="logout()">Logout</button>
+      <div class="profile-card">
+        <img
+          id="profileAvatar"
+          class="profile-avatar"
+          src="https://via.placeholder.com/130"
+          alt="Avatar"
+          onclick="document.getElementById('avatarInput').click()"
+        />
+        <input type="file" id="avatarInput" accept="image/*" style="display: none" />
+
+        <form onsubmit="updateProfile(event)" class="mt-3 text-start">
+          <div class="mb-3">
+            <label>First Name</label>
+            <input type="text" id="firstName" class="form-control" required />
+          </div>
+          <div class="mb-3">
+            <label>Last Name</label>
+            <input type="text" id="lastName" class="form-control" required />
+          </div>
+          <div class="mb-3">
+            <label>Email</label>
+            <input type="email" id="inputEmail" class="form-control" required />
+          </div>
+          <button type="submit" class="btn btn-primary w-100 mt-2">
+            💾 Save Changes
+          </button>
+        </form>
+      </div>
     </div>
 
     <script>
-      function openfile() {
-        document.querySelector(".profile-card input[type='file']").click();
-        // document.getElementById('avatar').click();
-      }
+      const BASE_URL = "http://blogs.csm.linkpc.net/api/v1";
+      let avatarFile = null;
 
-      if (localStorage.getItem("token")) {
-        const username = document.getElementById("welcomeMessage");
-        const email = document.getElementById("email");
-        const avatarImg = document.querySelector(".profile-card img"); // safely select the image
-
-        fetch("http://blogs.csm.linkpc.net/api/v1/auth/profile", {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            console.log(data);
-            const profile = data.data;
-            username.innerText = `Welcome, ${profile.firstName} ${profile.lastName}!`;
-            email.innerText = profile.email;
-            avatarImg.src = profile.avatar;
+      // 🧠 Load Profile
+      async function loadProfile() {
+        try {
+          const res = await fetch(`${BASE_URL}/auth/profile`, {
+            headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
           });
-      } else {
-        location.href = "login.html";
+          const data = await res.json();
+          if (!res.ok) throw new Error(data.message || "Failed to load profile");
+
+          const profile = data.data;
+          const avatarUrl =
+            (profile.avatar && `${profile.avatar}?t=${Date.now()}`) ||
+            "https://via.placeholder.com/150";
+
+          document.getElementById("firstName").value = profile.firstName || "";
+          document.getElementById("lastName").value = profile.lastName || "";
+          document.getElementById("inputEmail").value = profile.email || "";
+          document.getElementById("profileAvatar").src = avatarUrl;
+          document.getElementById("topbarAvatar").src = avatarUrl;
+        } catch {
+          alert("Failed to load profile");
+        }
       }
 
-      function logout() {
-        fetch("http://blogs.csm.linkpc.net/api/v1/auth/logout", {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            console.log(data);
-            localStorage.removeItem("token");
-            location.href = "login.html";
+      // 🖼️ Handle avatar selection
+      document.getElementById("avatarInput").onchange = (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        avatarFile = file;
+        document.getElementById("profileAvatar").src = URL.createObjectURL(file);
+      };
+
+      // 💾 Update profile
+      async function updateProfile(e) {
+        e.preventDefault();
+
+        // Update profile info
+        const profileData = {
+          firstName: firstName.value,
+          lastName: lastName.value,
+          email: inputEmail.value,
+        };
+        try {
+          const res = await fetch(`${BASE_URL}/profile`, {
+            method: "PUT",
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(profileData),
           });
+          if (!res.ok) throw new Error("Profile update failed");
+        } catch (err) {
+          return alert(err.message);
+        }
+
+        // Update avatar separately
+        if (avatarFile) {
+          const formData = new FormData();
+          formData.append("avatar", avatarFile);
+          try {
+            const res = await fetch(`${BASE_URL}/profile/avatar`, {
+              method: "POST",
+              headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+              body: formData,
+            });
+            const data = await res.json();
+            if (!res.ok) throw new Error(data.message || "Avatar update failed");
+
+            const newAvatar = `${data.data.avatar}?t=${Date.now()}`;
+            document.getElementById("profileAvatar").src = newAvatar;
+            document.getElementById("topbarAvatar").src = newAvatar;
+            localStorage.setItem("avatar", newAvatar);
+            avatarFile = null;
+          } catch (err) {
+            alert(err.message);
+          }
+        }
+
+        alert("✅ updated successfully!");
       }
 
-      function uploadAvatar() {
-        // target file input correctly
-        const fileInput = document.querySelector(".profile-card input[type='file']");
-        const avatarFile = fileInput.files[0];
-        const avatarImg = document.querySelector(".profile-card img");
-
-        const formData = new FormData();
-        formData.append("avatar", avatarFile);
-
-        // convrt from file into url
-        console.log(URL.createObjectURL(avatar));
-        document.getElementById('avatar').src = URL.createObjectURL(avatar);
-
-        fetch("http://blogs.csm.linkpc.net/api/v1/profile/avatar", {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-          body: formData,
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            console.log("Upload response:", data);
-            if (data.data && data.data.avatar) {
-              avatarImg.src = data.data.avatar; // update immediately
-              alert("Avatar uploaded successfully!");
-            } else {
-              alert("Upload completed, but no image returned from server.");
-            }
-          })
-          .catch((err) => {
-            console.error("Upload error:", err);
-            alert("Failed to upload avatar.");
-          });
-      }
-      function deleteAvatar(){
-        fetch("http://blogs.csm.linkpc.net/api/v1/profile/avatar", {
-          method: "DELETE",
-          headers: {
-            'Authorization': `Bearer ${localStorage.getItem("token")}`,
-          },
-        
-        })
-        .then(res => res.json())
-        .then(data => {
-          document.getElementById('avatar').src = data.data.avatar;
-        });
-      }
-      
+      loadProfile();
     </script>
   </body>
 </html>
