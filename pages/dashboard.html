@@ -3,7 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Category Dashboard</title>
+    <title>Profile Dashboard</title>
+
+    <!-- Bootstrap CSS -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -20,10 +22,12 @@
     <div class="sidebar">
       <h3>Blog</h3>
 
-      <a href="./dashboard.html" data-page="dashboard" class="nav-link"
-        >Dashboard</a
-      >
+      <!-- Dashboard -->
+      <a href="./dashboard.html" data-page="dashboard" class="nav-link">
+        Dashboard
+      </a>
 
+      <!-- Accordion: My Articles -->
       <div
         class="accordion accordion-flush"
         id="articlesAccordion"
@@ -39,6 +43,8 @@
               type="button"
               data-bs-toggle="collapse"
               data-bs-target="#collapseArticles"
+              aria-expanded="false"
+              aria-controls="collapseArticles"
               style="
                 font-weight: 500;
                 border-radius: 8px;
@@ -49,6 +55,7 @@
               My Articles
             </button>
           </h2>
+
           <div
             id="collapseArticles"
             class="accordion-collapse collapse"
@@ -56,6 +63,7 @@
             data-bs-parent="#articlesAccordion"
           >
             <div class="accordion-body p-0">
+              <!-- All Articles -->
               <a
                 href="./all_articles.html"
                 data-page="all_articles"
@@ -68,6 +76,8 @@
               >
                 All Articles
               </a>
+
+              <!-- Create Article -->
               <a
                 href="./create-article.html"
                 data-page="create-article"
@@ -85,61 +95,34 @@
         </div>
       </div>
 
-      <a href="./category.html" data-page="category" class="nav-link"
-        >Category</a
-      >
+      <!-- Category -->
+      <a href="./Category.html" data-page="Category" class="nav-link">
+        Category
+      </a>
     </div>
-
-    <!-- Main Content -->
+    <!-- ==================== MAIN CONTENT ==================== -->
     <div class="main-content">
       <div class="topbar">
         <div class="d-flex flex-column align-items-end">
           <div class="welcome" id="welcomeMessage">Welcome, .....!</div>
           <div class="email" id="email">example@gmail.com</div>
         </div>
-        <img class="avatar" id="avatar" src="" alt="Avatar" />
+        <img class="avatar" id="avatar" src="" />
       </div>
 
-      <!-- Categories Table -->
-      <section class="container my-5">
-        <div class="row">
-          <div class="card shadow">
-            <div class="card-body">
-              <div class="table-responsive category-table">
-                <table class="table table-hover" id="categoryTable">
-                  <thead class="table-light">
-                    <tr>
-                      <th>Name</th>
-                      <th class="text-end">Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody></tbody>
-                </table>
-              </div>
-
-              <!-- Fixed: ID added -->
-              <div id="loadMore" class="text-center mt-3 d-none">
-                <button id="loadMoreBtn" class="btn btn-outline-primary">
-                  Load More
-                </button>
-              </div>
-
-              <div
-                id="categoryError"
-                class="alert alert-danger mt-3 d-none"
-              ></div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <div class="container">
+        <!-- Your page content goes here -->
+        <h2 class="mt-4">Dashboard Content</h2>
+      </div>
     </div>
 
-  
+    <!-- ==================== SCRIPTS ==================== -->
+    <!-- Bootstrap JS (must be BEFORE our script) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
     <script src="/assets/js/activeManu.js"></script>
-    <script src="/assets/js/categories.js"></script>
-    <script>
-     
-    </script>
+
   </body>
 </html>

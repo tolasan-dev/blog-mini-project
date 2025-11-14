@@ -16,7 +16,7 @@
   </head>
 
   <body>
-    <!-- Sidebar – Using Bootstrap 5 Accordion (No Dropdown) -->
+    <!-- Sidebar – Using Bootstrap 5  -->
     <div class="sidebar">
       <h3>My App</h3>
 
@@ -144,54 +144,6 @@
     </div>
 
     <script src="/assets/vendor/bootstrap.bundle.min.js"></script>
-    <script>
-      const username = document.getElementById("welcomeMessage");
-      const email = document.getElementById("email");
-      const avatar = document.getElementById("avatar");
-
-      const iFirstName = document.getElementById("firstName");
-      const iLastName = document.getElementById("lastName");
-      const iEmail = document.getElementById("inputEmail");
-
-      fetch("http://blogs.csm.linkpc.net/api/v1/auth/profile", {
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          const profile = data.data;
-          username.innerText = `Welcome, ${profile.firstName} ${profile.lastName}!`;
-          email.innerText = profile.email;
-          avatar.src = profile.avatar;
-          iFirstName.value = profile.firstName;
-          iLastName.value = profile.lastName;
-          iEmail.value = profile.email;
-        })
-        .catch((err) => console.error(err));
-
-      const updateProfile = () => {
-        const payload = {
-          firstName: iFirstName.value,
-          lastName: iLastName.value,
-          email: iEmail.value,
-        };
-
-        fetch("http://blogs.csm.linkpc.net/api/v1/profile", {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-          body: JSON.stringify(payload),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            const profile = data.data;
-            username.innerText = `Welcome, ${profile.firstName} ${profile.lastName}!`;
-            email.innerText = profile.email;
-            avatar.src = profile.avatar;
-          })
-          .catch((error) => console.error(error));
-      };
-    </script>
+    <script src="/assets/js/activeManu.js"></script>
   </body>
 </html>

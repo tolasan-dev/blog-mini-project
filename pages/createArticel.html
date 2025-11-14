@@ -144,54 +144,37 @@
     </div>
 
     <script src="/assets/vendor/bootstrap.bundle.min.js"></script>
+
+    <script src="/assets/js/activeManu.js"></script>
+
     <script>
-      const username = document.getElementById("welcomeMessage");
-      const email = document.getElementById("email");
-      const avatar = document.getElementById("avatar");
+      document.addEventListener("DOMContentLoaded", () => {
+        const currentFile = location.pathname
+          .split("/")
+          .pop()
+          .replace(/\.html?$/i, "")
+          .toLowerCase(); // "all_articles", "category", etc.
 
-      const iFirstName = document.getElementById("firstName");
-      const iLastName = document.getElementById("lastName");
-      const iEmail = document.getElementById("inputEmail");
+        document.querySelectorAll(".sidebar a[data-page]").forEach((link) => {
+          const key = link.getAttribute("data-page");
 
-      fetch("http://blogs.csm.linkpc.net/api/v1/auth/profile", {
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          const profile = data.data;
-          username.innerText = `Welcome, ${profile.firstName} ${profile.lastName}!`;
-          email.innerText = profile.email;
-          avatar.src = profile.avatar;
-          iFirstName.value = profile.firstName;
-          iLastName.value = profile.lastName;
-          iEmail.value = profile.email;
-        })
-        .catch((err) => console.error(err));
+          if (key.toLowerCase() === currentFile) {
+            link.classList.add("active");
 
-      const updateProfile = () => {
-        const payload = {
-          firstName: iFirstName.value,
-          lastName: iLastName.value,
-          email: iEmail.value,
-        };
-
-        fetch("http://blogs.csm.linkpc.net/api/v1/profile", {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-          body: JSON.stringify(payload),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            const profile = data.data;
-            username.innerText = `Welcome, ${profile.firstName} ${profile.lastName}!`;
-            email.innerText = profile.email;
-            avatar.src = profile.avatar;
-          })
-          .catch((error) => console.error(error));
-      };
+            // Open accordion for sub-links
+            const collapse = link.closest(".accordion-collapse");
+            if (collapse) {
+              new bootstrap.Collapse(collapse, { toggle: false }).show();
+              const btn = collapse
+                .closest(".accordion-item")
+                .querySelector(".accordion-button");
+              if (btn) btn.classList.remove("collapsed");
+            }
+          } else {
+            link.classList.remove("active");
+          }
+        });
+      });
     </script>
   </body>
 </html>
