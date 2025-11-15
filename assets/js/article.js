@@ -29,9 +29,9 @@ fetch("http://blogs.csm.linkpc.net/api/v1/articles")
       let categoryName = item.category?.name || "Uncategorized";
 
       cardHTML += `
-            <div class="col-md-4 col-lg-3">
-                <div class="card h-100 shadow-sm border-0" onclick = "clickcard(${item.id})">
-                  <img src="${thumbnail}" class="card-img-top" alt="Thumbnail" style="height:180px;object-fit:cover;">
+            <div class=" col-md-4 col-lg-3 ">
+                <div class="card shadow-sm border-0" onclick = "clicked(${item.id})">
+                  <img src="${thumbnail}" class="card-img-top" alt="Thumbnail" style="height:200px;object-fit:cover;">
                   <div class="card-body">
                     <h5 class="card-title">${item.title}</h5>
                     <p class="card-text text-muted">${contentText}</p>
@@ -51,16 +51,16 @@ fetch("http://blogs.csm.linkpc.net/api/v1/articles")
     document.getElementById("articleContainer").innerHTML =
       cardHTML || `<p class="text-muted text-center">No articles found.</p>`;
   });
-function clickcard(id) {
+function clicked(id) {
   console.log(id);
-  localStorage.setItem("ariticle_id", id);
-  location.href = "../detail_article.html";
+  localStorage.setItem("article_id", id);
+  location.href = "./detail_article.html";
 }
 
-// detail ariticle or Single ariticle
+// Get request API by Single
 
 let myToken = localStorage.getItem("token");
-let article_id = localStorage.getItem("ariticle_id");
+let article_id = localStorage.getItem("article_id");
 const rowDis = document.getElementById("rowDis");
 
 fetch("http://blogs.csm.linkpc.net/api/v1/articles/" + article_id, {
@@ -90,11 +90,11 @@ fetch("http://blogs.csm.linkpc.net/api/v1/articles/" + article_id, {
     rowDis.innerHTML = `
       <div class="col-12">
         <div class="card">
-        
           <img
             src="${data.data.thumbnail}"
-            class="card-img-top"
-            style="height: 600px;"
+            class="card-img-top " 
+             style="height:600px; object-fit:cover;"
+            "
           />
           <div class="card-body">
             <h5 class="card-title">${data.data.title}</h5>

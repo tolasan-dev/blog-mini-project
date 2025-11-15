@@ -209,10 +209,6 @@ body {
 .btn-primary {
   background: linear-gradient(90deg, #c084fc, #ec489a);
   border: none;
-  border-radius: 20px;
-  font-weight: 600;
-  padding: 10px 0;
-  margin-top: 14px;
   transition: all 0.3s ease;
 }
 
@@ -227,7 +223,7 @@ body {
    ========================================================= */
 .card {
   cursor: pointer !important;
-  border-radius: 20px !important;
+  border-radius: 14px !important;
   overflow: hidden;
   padding: 18px !important;
   transition: 0.3s ease;
@@ -323,4 +319,70 @@ span {
   .form-col {
     padding: 1.5rem;
   }
+}
+
+/*   style handle Page Categories  table ------   */
+
+.categories-area .card {
+  padding: 0 !important;
+}
+.category-table {
+  max-height: 400px;
+}
+
+/* active page   */
+
+.sidebar a.nav-link {
+  display: block;
+  padding: 0.5rem 1rem;
+  margin: 4px 0;
+  border-radius: 8px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.btn-warning {
+  background: #c955f727;
+  color: #960dd1e9;
+  padding: 5px 20px;
+  border-radius: 20px;
+  border: 1px solid #960dd1e9;
+}
+.btn-warning:hover {
+  background: #c955f784;
+  color: #d10dc7fa;
+  border: none;
+}
+
+.btn-danger {
+  background: #f755bc15;
+  color: #d10dc7fa;
+  padding: 5px 10px;
+  border-radius: 20px;
+  border: 1px solid #d10dc7fa;
+}
+.btn-danger:hover {
+  background-color: #ef55f784;
+  color: #d10dc7fa !important;
+}
+
+.btn-danger:checked {
+  background-color: #ef55f784;
+}
+.btn-create-cat {
+  padding: 10px;
+  background: #000;
+}
+
+.form-control,
+.form-select {
+  background-color: #fafafa !important;
+  color: #333 !important;
+  border: 1px solid #999 !important;
+}
+.form-control:focus,
+.form-select:focus {
+  border-color: #690dc5e0 !important;
+  box-shadow: 0 8px 20px rgba(137, 13, 253, 0.3);
+  box-shadow: none !important;
 }
