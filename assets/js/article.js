@@ -36,11 +36,11 @@ fetch("http://blogs.csm.linkpc.net/api/v1/articles")
                     <h5 class="card-title">${item.title}</h5>
                     <p class="card-text text-muted">${contentText}</p>
                   </div>
-                  <div class="card-footer bg-white border-0 d-flex justify-content-between align-items-center">
-                    <span class="badge bg-primary">${categoryName}</span>
+                  <div class="card-footer  border-0 d-flex justify-content-between align-items-center">
+                    
                     <div class="creator d-flex align-items-center gap-2">
                       <img src="${creatorAvatar}" alt="Avatar" style="width:30px;height:30px;border-radius:50%;object-fit:cover;">
-                      <span class="text-muted" style="font-size:0.9rem;">${creatorName}</span>
+                      <span class="text-muted" style="font-size:1rem;">${creatorName}</span>
                     </div>
                   </div>
                 </div>
@@ -68,7 +68,6 @@ fetch("http://blogs.csm.linkpc.net/api/v1/articles/" + article_id, {
 })
   .then((res) => res.json())
   .then((data) => {
-
     let content = data.data.content;
     let htmlContent = "";
 

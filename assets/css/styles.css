@@ -1,11 +1,23 @@
+/* =========================================================
+   GLOBAL RESET & BODY
+   ========================================================= */
 body {
   margin: 0;
   display: flex;
   background-color: #f5f5f5;
   height: 100vh;
+  font-family: "Poppins", sans-serif;
 }
 
-/* Sidebar */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+}
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
 .sidebar {
   width: 230px;
   background: linear-gradient(180deg, #c084fc, #ec489a);
@@ -16,10 +28,6 @@ body {
   padding: 2rem 1rem;
   box-shadow: 2px 0 12px rgba(0, 0, 0, 0.15);
   border-radius: 0 20px 20px 0;
-}
-.active {
-  /* background: linear-gradient(180deg, #c084fc, #ec489a) !important; */
-  background: rgba(192, 21, 208, 0.634) !important;
 }
 
 .sidebar h3 {
@@ -39,7 +47,7 @@ body {
   transition: all 0.3s ease;
   text-align: center;
   font-weight: 500;
-  background: rgba(255, 255, 255, 0.3) !important;
+  background: rgba(255, 255, 255, 0.3);
 }
 
 .sidebar a:hover {
@@ -47,7 +55,13 @@ body {
   transform: scale(1.05);
 }
 
-/* === ACCORDION – MATCH GRADIENT PURPLE-PINK SIDEBAR === */
+.active {
+  background: rgba(192, 21, 208, 0.63) !important;
+}
+
+/* =========================================================
+   ACCORDION (Sidebar Dropdown)
+   ========================================================= */
 .accordion-button {
   background: transparent !important;
   color: #fff !important;
@@ -58,13 +72,14 @@ body {
   padding: 14px !important;
 }
 
-/* Perfect center text + arrow on right */
 .accordion-button.text-center {
   justify-content: center !important;
   padding-right: 2.5rem !important;
   position: relative;
 }
+
 .accordion-button::after {
+  filter: brightness(0) invert(1);
   position: absolute;
   right: 1rem;
   top: 50%;
@@ -77,14 +92,9 @@ body {
 }
 
 .accordion-button:not(.collapsed) {
-  background: rgba(192, 21, 208, 0.634) !important;
+  background: rgba(192, 21, 208, 0.63) !important;
   color: #fff !important;
   font-weight: 600;
-}
-
-.accordion-button::after {
-  filter: brightness(0) invert(1); /* White arrow */
-  margin-left: auto;
 }
 
 .accordion-body {
@@ -100,14 +110,14 @@ body {
   transform: scale(1.02);
 }
 
-/* Active sub-item highlight */
 .accordion-body a.active {
   background: rgba(255, 255, 255, 0.3) !important;
   font-weight: 600;
 }
 
-/* end DROPDOWN================ */
-/* Main content */
+/* =========================================================
+   MAIN CONTENT AREA
+   ========================================================= */
 .main-content {
   flex: 1;
   display: flex;
@@ -115,18 +125,20 @@ body {
   overflow-y: auto;
 }
 
-/* Topbar */
+/* =========================================================
+   TOPBAR
+   ========================================================= */
 .topbar {
   background: #fff;
-  border-bottom: 1px solid #e2e2e2;
+  border-bottom: 1px solid #931b83;
   padding: 15px 40px;
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   position: sticky;
   top: 0;
   z-index: 10;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.1);
 }
 
 .topbar .welcome {
@@ -148,22 +160,28 @@ body {
   margin-left: 15px;
 }
 
-/* Profile card */
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: start;
-  /* margin-top: 60px; */
-}
+/* =========================================================
+   REGISTER / PROFILE CARD
+   ========================================================= */
 
 .register-card {
-  background: #fff;
+  /* background: #fff; */
   padding: 2.5rem;
   border-radius: 15px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   max-width: 500px;
   width: 100%;
   animation: fadeIn 0.6s ease;
+  /* From https://css.glass */
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+.register-card input {
+  border-radius: 20px !important;
 }
 
 @keyframes fadeIn {
@@ -171,7 +189,6 @@ body {
     opacity: 0;
     transform: translateY(20px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);
@@ -192,9 +209,10 @@ body {
 .btn-primary {
   background: linear-gradient(90deg, #c084fc, #ec489a);
   border: none;
-  border-radius: 8px;
+  border-radius: 20px;
   font-weight: 600;
   padding: 10px 0;
+  margin-top: 14px;
   transition: all 0.3s ease;
 }
 
@@ -204,17 +222,105 @@ body {
   box-shadow: 0 4px 10px rgba(236, 72, 154, 0.3);
 }
 
+/* =========================================================
+   CARDS
+   ========================================================= */
 .card {
   cursor: pointer !important;
   border-radius: 20px !important;
   overflow: hidden;
   padding: 18px !important;
+  transition: 0.3s ease;
 }
+
 .card-img-top {
   border-radius: 10px !important;
 }
 
 .card:hover {
   transform: translateY(-5px);
-  transition: all 0.3s;
+}
+
+/* =========================================================
+   LOGIN PAGE
+   ========================================================= */
+.login-container {
+  height: 500px !important;
+  display: flex;
+  align-items: stretch;
+}
+
+/* LEFT SIDE / IMAGE */
+.image-col {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1350&q=80")
+      center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 2.2rem;
+  font-weight: 700;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+  border-radius: 10px;
+}
+
+/* RIGHT SIDE / FORM */
+.form-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #931b83;
+  padding: 2rem;
+  border-radius: 10px;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 500px;
+  background: white;
+  padding: 2.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.1);
+}
+
+.btn-login {
+  background: linear-gradient(180deg, #c084fc, #ec489a) !important;
+  border: none;
+  padding: 0.75rem;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  transition: all 0.25s ease;
+}
+
+.btn-login:hover {
+  background: linear-gradient(180deg, #690dc572, #ec489a) !important;
+  box-shadow: 0 8px 20px rgba(137, 13, 253, 0.3);
+}
+
+/* =========================================================
+   MISC
+   ========================================================= */
+.card-footer {
+  border-radius: 40px !important;
+}
+
+span {
+  background-color: rgba(0, 255, 145, 0.33);
+  padding: 0 10px !important;
+  border-radius: 30px;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+@media (max-width: 768px) {
+  .image-col {
+    height: 40vh;
+    font-size: 1.8rem;
+  }
+
+  .form-col {
+    padding: 1.5rem;
+  }
 }
