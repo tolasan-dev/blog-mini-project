@@ -1,6 +1,4 @@
-/* -------------------------------------------------------------
-         1. CONFIG
-         -------------------------------------------------------------- */
+
 const API_BASE = "http://blogs.csm.linkpc.net/api/v1";
 const DASHBOARD_URL = "/pages/dashboard.html";
 
