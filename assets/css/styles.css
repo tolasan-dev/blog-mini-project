@@ -301,11 +301,7 @@ body {
   border-radius: 40px !important;
 }
 
-span {
-  background-color: rgba(0, 255, 145, 0.33);
-  padding: 0 10px !important;
-  border-radius: 30px;
-}
+
 
 /* =========================================================
    RESPONSIVE
