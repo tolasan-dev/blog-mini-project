@@ -4,215 +4,93 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Modern Signup Form</title>
-    <!-- <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet"> -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
 
     <!--  css link external style.css-->
-    <link rel="stylesheet" href="assets/css/styles.css" />
+    <link rel="stylesheet" href="../assets/css/styles.css" />
     <!--  link bs5 external  -->
     <link rel="stylesheet" href="/assets/vendor/bootstrap.css" />
   </head>
   <body>
-    <div class="signup-container">
-      <div class="signup-image">
-        <h2>Welcome!</h2>
-        <p>Create your account and join our amazing community today.</p>
-      </div>
+    <div class="container">
+      <div class="register-card">
+        <div class="text-center mb-4">
+          <h2 class="fw-bold text-dark">Create Account</h2>
+          <p class="text-muted">Join us today!</p>
+        </div>
 
-      <div class="signup-form">
-        <h2>Create Account</h2>
-        <form id="signupForm">
-          <div class="form-row">
-            <div class="form-group">
-              <label for="firstname">First Name</label>
-              <input
-                type="text"
-                id="firstname"
-                placeholder="Enter your first name"
-              />
-              <div class="error-message" id="firstnameError"></div>
-            </div>
-
-            <div class="form-group">
-              <label for="lastname">Last Name</label>
-              <input
-                type="text"
-                id="lastname"
-                placeholder="Enter your last name"
-              />
-              <div class="error-message" id="lastnameError"></div>
-            </div>
+        <form id="registerForm" novalidate>
+          <div class="mb-3">
+            <label>First Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="firstName"
+              placeholder="First Name"
+              required
+            />
           </div>
-
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" placeholder="Enter your email" />
-            <div class="error-message" id="emailError"></div>
+          <div class="mb-3">
+            <label>Last Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="lastName"
+              placeholder="LastName"
+              required
+            />
           </div>
-
-          <div class="form-group">
-            <label for="password">Password</label>
+          <div class="mb-3">
+            <label>Email</label>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              placeholder="Email"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label>Password</label>
             <input
               type="password"
+              class="form-control"
               id="password"
-              placeholder="Enter your password"
+              placeholder="Password"
+              required
             />
-            <span
-              class="toggle-password"
-              onclick="togglePassword('password', this)"
-              >👁️</span
-            >
-            <div class="error-message" id="passwordError"></div>
           </div>
-
-          <div class="form-group">
-            <label for="confirmPassword">Confirm Password</label>
+          <div class="mb-3">
+            <label>Confirm Password</label>
             <input
               type="password"
+              class="form-control"
               id="confirmPassword"
-              placeholder="Confirm your password"
+              placeholder="Confirm Password"
+              required
             />
+          </div>
+          <button type="submit" class="btn btn-primary w-100 rounded-pill p-2">
             <span
-              class="toggle-password"
-              onclick="togglePassword('confirmPassword', this)"
-              >👁️</span
-            >
-            <div class="error-message" id="confirmPasswordError"></div>
-          </div>
-
-          <button type="button" class="btn" onclick="registerAccount()">
-            Sign Up
+              class="spinner-border spinner-border-sm d-none"
+              id="registerSpinner"
+            ></span>
+            Create Account
           </button>
-
-          <div class="social-login">
-            <p>Or sign up with</p>
-            <div class="social-buttons">
-              <div class="social-btn">
-                <img
-                  src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png"
-                  alt="Google"
-                />
-                Google
-              </div>
-              <div class="social-btn">
-                <img
-                  src="https://cdn-icons-png.flaticon.com/512/5968/5968764.png"
-                  alt="Facebook"
-                />
-                Facebook
-              </div>
-            </div>
-          </div>
         </form>
+        <div id="registerMessage"></div>
+        <!-- Messages -->
+        <div id="registerMessage" class="mt-3"></div>
+
+        <p class="text-center mt-4 small text-muted">
+          Already have an account?
+          <a href="/index.html" class="text-primary fw-semibold">Log in</a>
+        </p>
       </div>
     </div>
-
-    <script>
-      const firstname = document.getElementById("firstname");
-      const lastname = document.getElementById("lastname");
-      const email = document.getElementById("email");
-      const password = document.getElementById("password");
-      const confirmPassword = document.getElementById("confirmPassword");
-
-      const firstnameError = document.getElementById("firstnameError");
-      const lastnameError = document.getElementById("lastnameError");
-      const emailError = document.getElementById("emailError");
-      const passwordError = document.getElementById("passwordError");
-      const confirmPasswordError = document.getElementById(
-        "confirmPasswordError"
-      );
-
-      function isValidEmail(email) {
-        const regex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
-        return regex.test(email);
-      }
-
-      function isStrongPassword(pass) {
-        const regex = /^(?=.*[A-Z])(?=.*\\d)[A-Za-z\\d@$!%*?&]{8,}$/;
-        return regex.test(pass);
-      }
-
-      function clearErrors() {
-        document
-          .querySelectorAll(".error-message")
-          .forEach((el) => (el.textContent = ""));
-        document
-          .querySelectorAll("input")
-          .forEach((el) => el.classList.remove("invalid"));
-      }
-
-      function togglePassword(id, el) {
-        const input = document.getElementById(id);
-        if (input.type === "password") {
-          input.type = "text";
-          el.textContent = "🙈";
-        } else {
-          input.type = "password";
-          el.textContent = "👁️";
-        }
-      }
-
-      function registerAccount() {
-        clearErrors();
-        let valid = true;
-
-        if (firstname.value.trim() === "") {
-          firstnameError.textContent = "First name is required.";
-          firstname.classList.add("invalid");
-          valid = false;
-        }
-
-        if (lastname.value.trim() === "") {
-          lastnameError.textContent = "Last name is required.";
-          lastname.classList.add("invalid");
-          valid = false;
-        }
-
-        if (!isValidEmail(email.value.trim())) {
-          emailError.textContent = "Enter a valid email address.";
-          email.classList.add("invalid");
-          valid = false;
-        }
-
-        if (!isStrongPassword(password.value.trim())) {
-          passwordError.textContent =
-            "Password must have 8+ chars, 1 uppercase, and 1 number.";
-          password.classList.add("invalid");
-          valid = false;
-        }
-
-        if (password.value !== confirmPassword.value) {
-          confirmPasswordError.textContent = "Passwords do not match.";
-          confirmPassword.classList.add("invalid");
-          valid = false;
-        }
-
-        if (!valid) return;
-
-        const payload = {
-          firstName: firstname.value,
-          lastName: lastname.value,
-          email: email.value,
-          password: password.value,
-          confirmPassword: confirmPassword.value,
-        };
-
-        fetch("http://blogs.csm.linkpc.net/api/v1/auth/register", {
-
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            console.log(data);
-            document.getElementById("signupForm").reset();
-            alert("✅ Account created successfully!");
-          })
-          .catch((error) => {
-            console.error(error);
-            alert("Something went wrong during registration.");
-          });
-      }
-    </script>
+    <script src="/assets/js/auth.js"></script>
   </body>
 </html>

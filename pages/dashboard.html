@@ -82,40 +82,67 @@
     </div>
 
     <div class="main-content">
-      <div class="topbar d-flex justify-content-between align-items-center">
-        <div class="d-flex flex-column align-items-end">
-          <div class="welcome" id="welcomeMessage">Welcome, .....!</div>
-          <div class="email" id="email">example@gmail.com</div>
+      <div class="topbar d-flex justify-content-end align-items-center">
+        <!-- Dropdown Profile -->
+        <div class="dropdown">
+          <a
+            class="d-flex align-items-center text-decoration-none dropdown-toggle"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            id="profileDropdown"
+          >
+            <div class="flex-column text-end me-3">
+              <div class="welcome fw-bold d-none" id="welcomeMessage">
+                Welcome, .....!
+              </div>
+              <div class="email small text-muted d-none" id="email">
+                example@gmail.com
+              </div>
+            </div>
+            <img
+              class="avatar rounded-circle"
+              id="avatar"
+              src=""
+              alt="Avatar"
+              width="40"
+              height="40"
+              style="object-fit: cover"
+            />
+          </a>
+
+          <!-- Dropdown Menu -->
+          <ul class="dropdown-menu dropdown-menu-end shadow">
+            <li>
+              <a class="dropdown-item" href="/pages/profile.html">
+                <i class="bi bi-person me-2"></i> My Profile
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="../pages/settings.html">
+                <i class="bi bi-gear me-2"></i> Settings
+              </a>
+            </li>
+            <li><hr class="dropdown-divider" /></li>
+            <li>
+              <a class="dropdown-item text-danger" href="#" id="logoutBtn">
+                <i class="bi bi-box-arrow-right me-2"></i> Logout
+              </a>
+            </li>
+          </ul>
         </div>
-        <img class="avatar" id="avatar" src="" alt="Profile Avatar" />
       </div>
 
       <div class="container mt-4">
-        <div class="row g-4 p-2 " id="articleContainer"></div>
+        <div class="row g-4 p-2" id="articleContainer"></div>
       </div>
     </div>
 
     <script src="assets/vendor/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/article.js"></script>
 
-    <script>
-      // Fetch profile info
-      const username = document.getElementById("welcomeMessage");
-      const email = document.getElementById("email");
-      const avatar = document.getElementById("avatar");
-
-      fetch("http://blogs.csm.linkpc.net/api/v1/auth/profile", {
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          const profile = data.data;
-          username.innerText = `Welcome, ${profile.firstName} ${profile.lastName}!`;
-          email.innerText = profile.email;
-          avatar.src = profile.avatar || "https://via.placeholder.com/50";
-        })
-        .catch((err) => console.error(err));
-    </script>
+    <script src="/assets/js/article.js"></script>
+    <script src="/assets/vendor/bootstrap.bundle.min.js"></script>
   </body>
-  <script src="/assets/js/article.js"></script>
-  <script src="/assets/vendor/bootstrap.bundle.min.js"></script>
 </html>

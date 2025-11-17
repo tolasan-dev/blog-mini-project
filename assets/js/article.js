@@ -54,7 +54,7 @@ fetch("http://blogs.csm.linkpc.net/api/v1/articles")
 function clicked(id) {
   console.log(id);
   localStorage.setItem("article_id", id);
-  location.href = "./detail_article.html";
+  location.href = "../pages/detail_article.html";
 }
 
 // Get request API by Single
@@ -119,3 +119,64 @@ fetch("http://blogs.csm.linkpc.net/api/v1/articles/" + article_id, {
 
     document.getElementById("disArt").innerText = data.data.title;
   });
+
+// Fetch profile info
+const username = document.getElementById("welcomeMessage");
+const email = document.getElementById("email");
+const avatar = document.getElementById("avatar");
+
+fetch("http://blogs.csm.linkpc.net/api/v1/auth/profile", {
+  headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+})
+  .then((res) => res.json())
+  .then((data) => {
+    const profile = data.data;
+    username.innerText = `Welcome, ${profile.firstName} ${profile.lastName}!`;
+    email.innerText = profile.email;
+    avatar.src = profile.avatar || "https://via.placeholder.com/50";
+  })
+  .catch((err) => console.error(err));
+
+/* --------------------------------------------------------------
+     PROFILE – Show name & email when avatar is clicked
+   -------------------------------------------------------------- */
+document.addEventListener("DOMContentLoaded", () => {
+  const dropdownToggle = document.getElementById("profileDropdown");
+  const welcomeEl = document.getElementById("welcomeMessage");
+  const emailEl = document.getElementById("email");
+  const avatarEl = document.getElementById("avatar");
+  const logoutBtn = document.getElementById("logoutBtn");
+
+  // Load from localStorage
+  const userName = localStorage.getItem("userName") || "User";
+  const userEmail = localStorage.getItem("userEmail") || "example@gmail.com";
+  const userAvatar =
+    localStorage.getItem("userAvatar") || "https://via.placeholder.com/40";
+
+  welcomeEl.textContent = `Welcome, ${userName}!`;
+  emailEl.textContent = userEmail;
+  avatarEl.src = userAvatar;
+
+  // Show name & email when dropdown opens
+  dropdownToggle.addEventListener("click", () => {
+    setTimeout(() => {
+      // welcomeEl.classList.remove("d-none");
+      emailEl.classList.remove("d-none");
+    }, 100); // Wait for dropdown animation
+  });
+
+  // Optional: Hide again when dropdown closes
+  document
+    .querySelector(".dropdown-menu")
+    .addEventListener("hidden.bs.dropdown", () => {
+      welcomeEl.classList.add("d-none");
+      emailEl.classList.add("d-none");
+    });
+
+  // Logout
+  logoutBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    localStorage.clear();
+    window.location.href = "/index.html";
+  });
+});

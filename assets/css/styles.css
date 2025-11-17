@@ -227,6 +227,7 @@ body {
   overflow: hidden;
   padding: 18px !important;
   transition: 0.3s ease;
+  /* background: rgba(217, 72, 236, 0.178); */
 }
 
 .card-img-top {
@@ -299,9 +300,8 @@ body {
    ========================================================= */
 .card-footer {
   border-radius: 40px !important;
+  background: rgba(59, 58, 60, 0.3);
 }
-
-
 
 /* =========================================================
    RESPONSIVE
