@@ -97,7 +97,6 @@ fetch("http://blogs.csm.linkpc.net/api/v1/articles/" + article_id, {
             "
           />
           <div class="card-body">
-            <h5 class="card-title">${data.data.title}</h5>
 
             <div class="d-flex align-items-center mb-3">
               <img
@@ -110,7 +109,8 @@ fetch("http://blogs.csm.linkpc.net/api/v1/articles/" + article_id, {
                 <h6 class="mb-0">${creator.firstName} ${creator.lastName}</h6>
                 <small>ID: ${creator.id}</small>
               </div>
-            </div>
+            </div>                
+            <h5 class="card-title">${data.data.title}</h5>
             <p class="card-text">${htmlContent}</p>
           </div>
         </div>
