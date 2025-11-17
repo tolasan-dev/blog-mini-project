@@ -12,7 +12,7 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/assets/css/styles.css" />
+    <link rel="stylesheet" href="../assets/css/styles.css" />
   </head>
   <body>
     <div class="sidebar">
@@ -82,7 +82,7 @@
     </div>
 
     <div class="main-content">
-      <div class="topbar d-flex justify-content-between align-items-center">
+      <div class="topbar d-flex align-items-center">
         <div class="d-flex flex-column align-items-end">
           <div class="welcome" id="welcomeMessage">Welcome, .....!</div>
           <div class="email" id="email">example@gmail.com</div>
@@ -93,6 +93,7 @@
     </div>
 
     <script src="assets/vendor/bootstrap.bundle.min.js"></script>
+     <script src="../assets/js/article.js"></script>
 
     <script>
       // Fetch profile info
@@ -106,6 +107,8 @@
         .then((res) => res.json())
         .then((data) => {
           const profile = data.data;
+          console.log(profile);
+          
           username.innerText = `Welcome, ${profile.firstName} ${profile.lastName}!`;
           email.innerText = profile.email;
           avatar.src = profile.avatar || "https://via.placeholder.com/50";
@@ -113,5 +116,4 @@
         .catch((err) => console.error(err));
     </script>
   </body>
-  <script src="/assets/js/article.js"></script>
 </html>

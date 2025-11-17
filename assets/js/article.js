@@ -54,7 +54,7 @@ fetch("http://blogs.csm.linkpc.net/api/v1/articles")
 function clicked(id) {
   console.log(id);
   localStorage.setItem("article_id", id);
-  location.href = "./detail_article.html";
+  location.href = "../pages/detail_article.html";
 }
 
 // Get request API by Single
