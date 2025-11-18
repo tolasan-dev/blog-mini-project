@@ -185,14 +185,6 @@ body {
   border-radius: 20px !important;
 }
 
-<<<<<<< HEAD
-/* -----------    style login --------------- */
-
-.login-container {
-  height: 500px !important;
-  display: flex;
-  align-items: stretch;
-=======
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -202,7 +194,6 @@ body {
     opacity: 1;
     transform: translateY(0);
   }
->>>>>>> ad2b70fbacf6ee44c30b08f70cb463f401a2fc3f
 }
 
 /* Image Column */
@@ -243,14 +234,7 @@ body {
   /* background: #0d6efd; */
   background: linear-gradient(180deg, #c084fc, #ec489a) !important;
   border: none;
-<<<<<<< HEAD
-  padding: 0.75rem;
-  font-weight: 600;
-  border-radius: 0.5rem;
-  transition: all 0.25s ease; /* <-- Key for smooth hover */
-=======
   transition: all 0.3s ease;
->>>>>>> ad2b70fbacf6ee44c30b08f70cb463f401a2fc3f
 }
 
 .btn-login:hover {
@@ -426,7 +410,13 @@ body {
   color: #d10dc7fa;
   border: none;
 }
-
+.btn-primary {
+  background: linear-gradient(180deg, #690dc572, #ec489a) !important;
+  border: none;
+}
+.btn-primary:hover {
+  background-color: #931b83 !important;
+}
 .btn-danger {
   background: #f755bc15;
   color: #d10dc7fa;

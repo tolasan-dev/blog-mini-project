@@ -1,12 +1,3 @@
-<<<<<<< HEAD
-
-
-function loadCategories() {
-  fetch("http://blogs.csm.linkpc.net/api/v1/categories", {
-    method: "GET",
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("token"),
-=======
 /* --------------------------------------------------------------
    1. CONFIG
    -------------------------------------------------------------- */
@@ -56,7 +47,6 @@ function loadCategories() {
     method: "GET",
     headers: {
       Authorization: "Bearer " + token,
->>>>>>> ad2b70fbacf6ee44c30b08f70cb463f401a2fc3f
       "Content-Type": "application/json",
     },
   })
@@ -65,37 +55,6 @@ function loadCategories() {
       return res.json();
     })
     .then((data) => {
-<<<<<<< HEAD
-      console.log("Categories:", data);
-
-      // FIX: categories are inside data.data.items
-      renderCategories(data.data.items);
-    })
-    .catch((err) => {
-      console.error("Fetch error:", err.message);
-      const errorBox = document.getElementById("categoryError");
-      errorBox.classList.remove("d-none");
-      errorBox.textContent = "Failed to load categories: " + err.message;
-    });
-}
-
-// ===== FUNCTION: Render categories into table =====
-function renderCategories(categories) {
-  const tbody = document.querySelector("#categoryTable tbody");
-  tbody.innerHTML = ""; // clear table
-
-  categories.forEach((cat) => {
-    const tr = document.createElement("tr");
-
-    tr.innerHTML = `
-        <td>${cat.name}</td>
-        <td class="text-end">
-          <button class="btn btn-sm btn-warning">Edit</button>
-          <button class="btn btn-sm btn-danger">Delete</button>
-        </td>
-      `;
-
-=======
       if (data.result && Array.isArray(data.data.items)) {
         renderCategories(data.data.items);
       } else {
@@ -130,15 +89,10 @@ function renderCategories(categories) {
         </button>
       </td>
     `;
->>>>>>> ad2b70fbacf6ee44c30b08f70cb463f401a2fc3f
     tbody.appendChild(tr);
   });
 }
 
-<<<<<<< HEAD
-// ===== CALL FUNCTION WHEN PAGE LOADS =====
-loadCategories();
-=======
 /* --------------------------------------------------------------
    6. CREATE – Save New Category
    -------------------------------------------------------------- */
@@ -268,4 +222,3 @@ function escapeHtml(text) {
    10. Auto Load on Page Open
    -------------------------------------------------------------- */
 document.addEventListener("DOMContentLoaded", loadCategories);
->>>>>>> ad2b70fbacf6ee44c30b08f70cb463f401a2fc3f
