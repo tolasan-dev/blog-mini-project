@@ -2,28 +2,102 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Profile Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Update Article</title>
+
+    <!-- Bootstrap -->
     <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="/assets/css/styles.css" />
+    <link rel="stylesheet" href="../assets/css/styles.css" />
+
+    <style>
+      * {
+        font-family: "Poppins", sans-serif;
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        display: flex;
+        background-color: #f5f5f5;
+        min-height: 100vh;
+      }
+
+      /* MAIN CONTENT */
+      .main-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+        padding: 20px 40px;
+      }
+
+      /* TOPBAR */
+      .topbar {
+        background: #fff;
+        border-bottom: 1px solid #e2e2e2;
+        padding: 15px 20px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        border-radius: 10px;
+        margin-bottom: 30px;
+      }
+
+      .topbar .avatar {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid #ec489a;
+        margin-left: 15px;
+      }
+
+      /* CARD */
+      .register-card {
+        background: #fff;
+        padding: 2.5rem 2rem;
+        border-radius: 15px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        max-width: 600px;
+        margin: 0 auto;
+        animation: fadeIn 0.6s ease;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .btn-primary {
+        background: linear-gradient(90deg, #a855f7, #ec489a);
+        border: none;
+        border-radius: 10px;
+        padding: 12px 0;
+        transition: 0.3s ease;
+      }
+    </style>
   </head>
 
   <body>
-    <!-- Sidebar – Using Bootstrap 5 Accordion (No Dropdown) -->
+    <!-- sidebar  -->
     <div class="sidebar">
-      <h3>My App</h3>
+      <h3>Blog</h3>
+      <a href="./dashboard.html" class="active">Dashboard</a>
 
-      <!-- Dashboard -->
-      <a href="./dashboard.html" class="active"> Dashboard </a>
-
-      <!-- Accordion: My Articles -->
       <div
         class="accordion accordion-flush"
         id="articlesAccordion"
@@ -35,7 +109,7 @@
         >
           <h2 class="accordion-header" id="headingArticles">
             <button
-              class="accordion-button collapsed text-center d-flex align-items-center"
+              class="accordion-button collapsed"
               type="button"
               data-bs-toggle="collapse"
               data-bs-target="#collapseArticles"
@@ -66,132 +140,98 @@
                   border-radius: 8px;
                   background: rgba(255, 255, 255, 0.1);
                 "
+                >All Articles</a
               >
-                All Articles
-              </a>
               <a
                 href="./create-article.html"
                 class="d-block text-center py-2 text-white text-decoration-none"
                 style="
                   font-weight: 500;
                   border-radius: 8px;
-                  /* margin: 4px 8px 8px; */
                   background: rgba(255, 255, 255, 0.1);
                 "
+                >Create Article</a
               >
-                Create Article
-              </a>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Category -->
-      <a href="./categories.html"> Category </a>
+      <a href="./categories.html">Category</a>
     </div>
-
-    <!-- Main Content -->
+    <!-- MAIN CONTENT -->
     <div class="main-content">
+      <!-- TOPBAR -->
       <div class="topbar">
-        <div class="d-flex flex-column align-items-end">
-          <div class="welcome" id="welcomeMessage">Welcome, .....!</div>
-          <div class="email" id="email">example@gmail.com</div>
+        <div class="text-end">
+          <div id="welcomeMessage" class="fw-semibold">Welcome...</div>
+          <div id="email" class="text-muted small">email@example.com</div>
         </div>
-        <img class="avatar" id="avatar" src="" />
+        <img
+          id="avatar"
+          class="avatar"
+          src="../assets/img/default-avatar.jpg"
+        />
       </div>
 
-      <!-- Profile Form -->
-      <div class="container">
-        <div class="register-card">
-          <h4 class="text-center mb-4" style="color: #8b5cf6">
-            Edit Your Profile
-          </h4>
-          <form class="d-flex flex-column">
-            <div class="row mb-3">
-              <div class="col">
-                <input
-                  type="text"
-                  id="firstName"
-                  class="form-control"
-                  placeholder="First name"
-                />
-              </div>
-              <div class="col ps-0">
-                <input
-                  type="text"
-                  id="lastName"
-                  class="form-control"
-                  placeholder="Last name"
-                />
-              </div>
+      <!-- UPDATE ARTICLE FORM -->
+      <div class="register-card">
+        <h1>Update Article</h1>
+
+        <form id="articleForm">
+          <div class="mb-3">
+            <label class="form-label">Title</label>
+            <input id="title" type="text" class="form-control" />
+            <div class="invalid-feedback" id="titleError">
+              Title is required.
             </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Content</label>
+            <textarea id="content" class="form-control" rows="5"></textarea>
+            <div class="invalid-feedback" id="contentError">
+              Content is required.
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Category</label>
+            <select id="categoryId" class="form-select">
+              <option value="">Select Category</option>
+            </select>
+            <div class="invalid-feedback" id="categoryError">
+              Category is required.
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <label class="form-label">Upload Thumbnail</label>
             <input
-              type="email"
-              id="inputEmail"
-              class="form-control mb-3"
-              placeholder="Email address"
+              id="formFile"
+              type="file"
+              class="form-control"
+              accept="image/*"
+              onchange="previewNewThumbnail()"
             />
-            <button
-              type="button"
-              class="btn btn-primary"
-              onclick="updateProfile()"
-            >
-              Save
-            </button>
-          </form>
-        </div>
+            <img
+              id="thumbnailPreview"
+              style="width: 300px; margin-top: 15px; border-radius: 12px"
+            />
+          </div>
+
+          <button
+            type="button"
+            onclick="updateArticle()"
+            class="btn btn-primary w-100 btn-lg"
+          >
+            Update
+          </button>
+        </form>
       </div>
     </div>
 
-    <script src="/assets/vendor/bootstrap.bundle.min.js"></script>
-    <script>
-      const username = document.getElementById("welcomeMessage");
-      const email = document.getElementById("email");
-      const avatar = document.getElementById("avatar");
-
-      const iFirstName = document.getElementById("firstName");
-      const iLastName = document.getElementById("lastName");
-      const iEmail = document.getElementById("inputEmail");
-
-      fetch("http://blogs.csm.linkpc.net/api/v1/auth/profile", {
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          const profile = data.data;
-          username.innerText = `Welcome, ${profile.firstName} ${profile.lastName}!`;
-          email.innerText = profile.email;
-          avatar.src = profile.avatar;
-          iFirstName.value = profile.firstName;
-          iLastName.value = profile.lastName;
-          iEmail.value = profile.email;
-        })
-        .catch((err) => console.error(err));
-
-      const updateProfile = () => {
-        const payload = {
-          firstName: iFirstName.value,
-          lastName: iLastName.value,
-          email: iEmail.value,
-        };
-
-        fetch("http://blogs.csm.linkpc.net/api/v1/profile", {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-          body: JSON.stringify(payload),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            const profile = data.data;
-            username.innerText = `Welcome, ${profile.firstName} ${profile.lastName}!`;
-            email.innerText = profile.email;
-            avatar.src = profile.avatar;
-          })
-          .catch((error) => console.error(error));
-      };
-    </script>
+    <script src="../assets/vendor/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/post-articles.js"></script>
   </body>
 </html>
