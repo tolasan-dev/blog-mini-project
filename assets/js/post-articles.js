@@ -6,7 +6,7 @@ const articleId = localStorage.getItem("articleEdit");
 
 if (!token) {
   alert("Missing token. Please login again.");
-  window.location.href = "../login.html";
+  window.location.href = "../pages/login.html";
 }
 
 /* =======================
@@ -47,8 +47,6 @@ function loadCategories() {
     });
 }
 
-
-
 /* =======================
        LOAD ARTICLE DATA
     ======================== */
@@ -67,7 +65,6 @@ function loadArticleData() {
     });
 }
 
-
 /* Thumbnail Preview */
 function previewNewThumbnail() {
   const file = document.getElementById("formFile").files[0];
@@ -75,8 +72,6 @@ function previewNewThumbnail() {
     document.getElementById("thumbnailPreview").src = URL.createObjectURL(file);
   }
 }
-
-
 
 /* =======================
        UPDATE ARTICLE

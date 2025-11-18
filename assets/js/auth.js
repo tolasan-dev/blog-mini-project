@@ -1,8 +1,3 @@
-/* ==============================================================
-   auth.js – Login & Register in ONE file (Junior Level)
-   Works with: index.html (login) & register.html
-   Current time: Nov 16, 2025 11:51 AM (Cambodia)
-   ============================================================== */
 
 /* --------------------------------------------------------------
    1. CONFIG – API URLs (NO /v1!)
