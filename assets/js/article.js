@@ -56,7 +56,6 @@ fetch("http://blogs.csm.linkpc.net/api/v1/articles")
       cardHTML || `<p class="text-muted text-center">No articles found.</p>`;
   });
 function clicked(id) {
-  console.log(id);
   localStorage.setItem("article_id", id);
   location.href = "../pages/detail_article.html";
 }
@@ -101,9 +100,8 @@ fetch("http://blogs.csm.linkpc.net/api/v1/articles/" + article_id, {
             "
           />
           <div class="card-body">
-            <h5 class="card-title">${data.data.title}</h5>
 
-            <div class="d-flex align-items-center mb-3">
+            <div class="d-flex align-items-center mb-3" onclick='getProfile(${creator.id})'>
               <img
                 src="${creator.avatar}"
                 width="60"
@@ -115,6 +113,7 @@ fetch("http://blogs.csm.linkpc.net/api/v1/articles/" + article_id, {
                 <small>ID: ${creator.id}</small>
               </div>
             </div>
+            <h5 class="card-title">${data.data.title}</h5>
             <p class="card-text">${htmlContent}</p>
           </div>
         </div>
@@ -123,6 +122,8 @@ fetch("http://blogs.csm.linkpc.net/api/v1/articles/" + article_id, {
 
     document.getElementById("disArt").innerText = data.data.title;
   });
+
+
 
 // Fetch profile info
 const username = document.getElementById("welcomeMessage");
@@ -184,3 +185,9 @@ document.addEventListener("DOMContentLoaded", () => {
     window.location.href = "../pages/login.html";
   });
 });
+
+function getProfile(id) {
+  console.log("Profile ID:", id);
+  localStorage.setItem("profile_id", id);
+  location.href = "../pages/viewprofile-ar.html";
+}
