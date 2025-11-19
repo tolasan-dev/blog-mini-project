@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detailview-profile</title>
+</head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<body>
+    <div class="container">
+        <div class="row gx-0 p-3" id="rowDis"></div>
+    </div>
+</body>
+<script>
+    mytoken = localStorage.getItem("token");
+    let viewprofile = document.getElementById("viewprofile");
+    let profile_id = localStorage.getItem("profile_id");
+    console.log(profile_id);
+
+    fetch("http://blogs.csm.linkpc.net/api/v1/articles/" + profile_id, {
+        headers: { Authorization: `Bearer ${mytoken}` },
+    })
+    .then((res) => res.json())
+    .then((data) => {
+    let content = data.data.content;
+    let htmlContent = "";
+
+    try {
+      const delta = JSON.parse(content);
+      if (delta.ops) {
+        delta.ops.forEach((op) => {
+          let text = op.insert;
+          if (op.attributes?.bold) {
+            text = `<strong>${text}</strong>`;
+          }
+          htmlContent += text.replace(/\n/g, "<br>");
+        });
+      }
+    } catch (e) {
+      htmlContent = content;
+    }
+    const creator = data.data.creator;
+
+    rowDis.innerHTML = `
+      <div class="col-12">
+        <div class="card">
+          <img
+            src="${data.data.thumbnail}"
+            class="card-img-top " 
+             style="height:600px; object-fit:cover;"
+            "
+          />
+          <div class="card-body">
+            <h5 class="card-title">${data.data.title}</h5>
+
+            <div class="d-flex align-items-center mb-3" onclick='getProfile(${creator.id})'>
+              <img
+                src="${creator.avatar}"
+                width="60"
+                height="60"
+                style="border-radius: 50%; object-fit: cover;"
+              />
+              <div class="ms-3">
+                <h6 class="mb-0">${creator.firstName} ${creator.lastName}</h6>
+                <small>ID: ${creator.id}</small>
+              </div>
+            </div>
+            <p class="card-text">${htmlContent}</p>
+          </div>
+        </div>
+      </div>
+    `;
+
+    document.getElementById("disArt").innerText = data.data.title;
+  });
+
+</script>
+</html>
