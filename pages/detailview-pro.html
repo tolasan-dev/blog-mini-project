@@ -14,10 +14,10 @@
 <script>
     mytoken = localStorage.getItem("token");
     let viewprofile = document.getElementById("viewprofile");
-    let profile_id = localStorage.getItem("profile_id");
-    console.log(profile_id);
+    let article_id = localStorage.getItem("article_id");
+    console.log(article_id);
 
-    fetch("http://blogs.csm.linkpc.net/api/v1/articles/" + profile_id, {
+    fetch("http://blogs.csm.linkpc.net/api/v1/articles/" + article_id, {
         headers: { Authorization: `Bearer ${mytoken}` },
     })
     .then((res) => res.json())
