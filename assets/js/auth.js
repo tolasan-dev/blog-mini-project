@@ -4,7 +4,7 @@
    -------------------------------------------------------------- */
 const API_LOGIN = "http://blogs.csm.linkpc.net/api/v1/auth/login";
 const API_REGISTER = "http://blogs.csm.linkpc.net/api/v1/auth/register";
-const DASHBOARD_URL = "/pages/dashboard.html";
+const DASHBOARD_URL = "../pages/dashboard.html";
 const LOGIN_PAGE = "/index.html";
 
 /* --------------------------------------------------------------
