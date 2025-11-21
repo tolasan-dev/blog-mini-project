@@ -2,7 +2,7 @@
 
 //
 
-fetch("http://blogs.csm.linkpc.net/api/v1/articles")
+fetch("http://blogs.csm.linkpc.net/api/v1/articles?search=&_page=1&_per_page=10&sortBy=content&sortDir=asc")
   .then((res) => res.json())
   .then((result) => {
     const data = result.data?.items || [];
