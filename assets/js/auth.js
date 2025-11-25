@@ -147,7 +147,7 @@ if (regForm) {
         if (data.result) {
           showMsg(msgBox, "Account created! Going to login...", "success");
           setTimeout(() => {
-            window.location.href = LOGIN_PAGE;
+            window.location.href = "pages/login.html";
           }, 1500);
         } else {
           showMsg(msgBox, data.message || "Register failed", "danger");
