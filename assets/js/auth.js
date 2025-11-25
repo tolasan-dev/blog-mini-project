@@ -1,15 +1,10 @@
-/* ==============================================================
-   auth.js – Login & Register in ONE file (Junior Level)
-   Works with: index.html (login) & register.html
-   Current time: Nov 16, 2025 11:51 AM (Cambodia)
-   ============================================================== */
 
 /* --------------------------------------------------------------
    1. CONFIG – API URLs (NO /v1!)
    -------------------------------------------------------------- */
 const API_LOGIN = "http://blogs.csm.linkpc.net/api/v1/auth/login";
 const API_REGISTER = "http://blogs.csm.linkpc.net/api/v1/auth/register";
-const DASHBOARD_URL = "/pages/dashboard.html";
+const DASHBOARD_URL = "../pages/dashboard.html";
 const LOGIN_PAGE = "/index.html";
 
 /* --------------------------------------------------------------
@@ -152,7 +147,7 @@ if (regForm) {
         if (data.result) {
           showMsg(msgBox, "Account created! Going to login...", "success");
           setTimeout(() => {
-            window.location.href = LOGIN_PAGE;
+            window.location.href ="/pages/login.html";
           }, 1500);
         } else {
           showMsg(msgBox, data.message || "Register failed", "danger");

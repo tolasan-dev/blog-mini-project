@@ -3,232 +3,152 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>User Dashboard</title>
+    <title id="disArt">Loading Article...</title>
+
+    <!-- Bootstrap 5 + Icons -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
 
     <style>
       body {
-        background: #f8f9fa;
-        font-family: "Poppins", sans-serif;
-        margin: 0;
-        display: flex;
-        height: 100vh;
-        overflow: hidden;
+        background: #ffffff;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.7;
       }
-
-      /* Sidebar */
-      .sidebar {
-        width: 230px;
-        background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-        color: white;
-        display: flex;
-        flex-direction: column;
-        padding: 30px 20px;
-        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+      .topbar {
+        background: white;
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+        padding: 1rem 0;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
       }
-
-      .sidebar h4 {
-        font-weight: 700;
-        margin-bottom: 40px;
-        text-align: center;
-      }
-
-      .sidebar a {
-        color: white;
-        text-decoration: none;
-        margin: 10px 0;
-        padding: 10px;
-        border-radius: 8px;
-        transition: all 0.3s ease;
-        display: block;
-      }
-
-      .sidebar a:hover {
-        background: rgba(255, 255, 255, 0.2);
-        transform: translateX(5px);
-      }
-
-      /* Main content */
-      .main-content {
-        flex: 1;
-        padding: 40px;
-        overflow-y: auto;
-      }
-
-      .main-content h2 {
-        font-weight: 600;
-        color: #333;
-      }
-
-      /* Profile card on the right */
-      .profile-card {
-        width: 300px;
-        background: #fff;
-        border-radius: 15px;
-        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-        padding: 25px;
-        position: absolute;
-        right: 30px;
-        top: 30px;
-        text-align: center;
-      }
-
-      .profile-card img {
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
+      .article-header-img {
+        width: 100%;
+        height: 500px;
         object-fit: cover;
-        margin-bottom: 15px;
+        border-radius: 0 0 20px 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
       }
-
-      .profile-card h5 {
-        font-weight: 600;
-        margin-bottom: 5px;
+      .creator-avatar {
+        width: 70px;
+        height: 70px;
+        object-fit: cover;
+        border: 4px solid white;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
       }
-
-      .profile-card p {
-        color: #555;
-        font-size: 14px;
+      .article-title {
+        font-size: 2.8rem;
+        font-weight: 800;
+        color: #1a1a1a;
+        line-height: 1.2;
       }
-
-      .logout-btn {
-        background: linear-gradient(135deg, #ff758c, #ff7eb3);
+      .article-meta {
+        color: #666;
+        font-size: 1rem;
+      }
+      .article-content {
+        font-size: 1.25rem;
+        color: #2c2c2c;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      .back-btn {
+        background: #6b05d0;
         border: none;
-        color: #fff;
-        padding: 10px 20px;
-        border-radius: 8px;
-        margin-top: 15px;
-        transition: all 0.3s ease;
+        border-radius: 50px;
+        padding: 10px 24px;
+        color: white;
+        font-weight: 600;
       }
-
-      .logout-btn:hover {
-        background: linear-gradient(135deg, #ff5f7e, #ff85a2);
-        transform: translateY(-2px);
+      @media (max-width: 768px) {
+        .article-header-img {
+          height: 300px;
+        }
+        .article-title {
+          font-size: 2.2rem;
+        }
+        .creator-avatar {
+          width: 60px;
+          height: 60px;
+        }
       }
     </style>
   </head>
   <body>
-    <!-- Sidebar -->
-    <div class="sidebar">
-      <h4>My Dashboard</h4>
-      <a href="#">🏠 Home</a>
-      <a href="#">📰 My Posts</a>
-      <a href="#">⚙️ Settings</a>
-      <a href="#">📩 Messages</a>
+    <!-- Topbar with Profile Dropdown -->
+    <div class="topbar d-flex justify-content-between align-items-center px-4">
+      <a href="../pages/detail_article.html" class="back-btn btn">
+        Back to Articles
+      </a>
+
+      <div class="dropdown">
+        <a
+          class="d-flex align-items-center text-decoration-none dropdown-toggle"
+          href="#"
+          role="button"
+          data-bs-toggle="dropdown"
+          id="profileDropdown"
+        >
+          <div class="text-end me-3">
+            <div class="fw-bold" id="welcomeMessage">Welcome...</div>
+            <div class="small text-muted d-none" id="email">
+              loading@email.com
+            </div>
+          </div>
+          <img
+            src="https://via.placeholder.com/50"
+            id="avatar"
+            class="rounded-circle"
+            width="50"
+            height="50"
+            style="object-fit: cover"
+          />
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end shadow">
+          <li>
+            <a class="dropdown-item" href="/pages/profile.html">My Profile</a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="/pages/create-article.html"
+              >Write Article</a
+            >
+          </li>
+          <li><hr class="dropdown-divider" /></li>
+          <li>
+            <a class="dropdown-item text-danger" href="#" id="logoutBtn"
+              >Logout</a
+            >
+          </li>
+        </ul>
+      </div>
     </div>
 
-    <!-- Main Content -->
-    <div class="main-content">
-      <h2 id="welcomeMessage">Welcome, User!</h2>
-      <p class="text-muted">Here is your personalized dashboard content...</p>
-      <hr />
+
+    <div class="container my-5">
+      <div class="row justify-content-center" id="rowDis">
+        <!-- Content loaded by article.js -->
+        <div class="col-12 text-center">
+          <div
+            class="spinner-border text-primary"
+            style="width: 4rem; height: 4rem"
+            role="status"
+          >
+            <span class="visually-hidden">Loading article...</span>
+          </div>
+          <p class="mt-3 text-muted">Loading your article...</p>
+        </div>
+      </div>
     </div>
 
-    <!-- Profile Card -->
-    <div class="profile-card">
-      <img id="avatar" alt="User Avatar" onclick="openfile()"><br>
-      <button onclick="deleteAvatar()">Delete Avatar</button><br><br>
-      <input type="file" id="avatar" accept="image/*" oninput="uploadAvatar()" />
-      <h5 id="username">User Name</h5>
-      <p id="email">user@example.com</p>
-      <button class="logout-btn" onclick="logout()">Logout</button>
-    </div>
-
-    <script>
-      function openfile() {
-        document.querySelector(".profile-card input[type='file']").click();
-        // document.getElementById('avatar').click();
-      }
-
-      if (localStorage.getItem("token")) {
-        const username = document.getElementById("welcomeMessage");
-        const email = document.getElementById("email");
-        const avatarImg = document.querySelector(".profile-card img"); // safely select the image
-
-        fetch("http://blogs.csm.linkpc.net/api/v1/auth/profile", {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            console.log(data);
-            const profile = data.data;
-            username.innerText = `Welcome, ${profile.firstName} ${profile.lastName}!`;
-            email.innerText = profile.email;
-            avatarImg.src = profile.avatar;
-          });
-      } else {
-        location.href = "login.html";
-      }
-
-      function logout() {
-        fetch("http://blogs.csm.linkpc.net/api/v1/auth/logout", {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            console.log(data);
-            localStorage.removeItem("token");
-            location.href = "login.html";
-          });
-      }
-
-      function uploadAvatar() {
-        // target file input correctly
-        const fileInput = document.querySelector(".profile-card input[type='file']");
-        const avatarFile = fileInput.files[0];
-        const avatarImg = document.querySelector(".profile-card img");
-
-        const formData = new FormData();
-        formData.append("avatar", avatarFile);
-
-        // convrt from file into url
-        console.log(URL.createObjectURL(avatar));
-        document.getElementById('avatar').src = URL.createObjectURL(avatar);
-
-        fetch("http://blogs.csm.linkpc.net/api/v1/profile/avatar", {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-          body: formData,
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            console.log("Upload response:", data);
-            if (data.data && data.data.avatar) {
-              avatarImg.src = data.data.avatar; // update immediately
-              alert("Avatar uploaded successfully!");
-            } else {
-              alert("Upload completed, but no image returned from server.");
-            }
-          })
-          .catch((err) => {
-            console.error("Upload error:", err);
-            alert("Failed to upload avatar.");
-          });
-      }
-      function deleteAvatar(){
-        fetch("http://blogs.csm.linkpc.net/api/v1/profile/avatar", {
-          method: "DELETE",
-          headers: {
-            'Authorization': `Bearer ${localStorage.getItem("token")}`,
-          },
-        
-        })
-        .then(res => res.json())
-        .then(data => {
-          document.getElementById('avatar').src = data.data.avatar;
-        });
-      }
-      
-    </script>
+    <!-- Bootstrap + Your JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/article.js"></script>
   </body>
 </html>
